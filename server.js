@@ -4,6 +4,8 @@ import express from "express"
 // castom module and config
 import connectDB from "./config/database.js"
 
+// all the routers 
+import userRouter from "./routes/userRoutes.js"
 
 dotenv.config()
 const app = express()
@@ -11,9 +13,7 @@ const app = express()
 // connecting mongodb database 
 connectDB()
 
-app.get("/", (req, res) => {
-    return res.send("hello world")
-})
+app.use("/", userRouter)
 
 
 const PORT = process.env.PORT || 5000
