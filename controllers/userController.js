@@ -1,5 +1,6 @@
 
 
 export const register = (req, res) => {
-    res.send("hello world")
+    const { name, email, password } = req.body
+
 }
