@@ -42,7 +42,6 @@ export const register = async (req, res) => {
 
 
     } catch (err) {
-        console.log(err)
         return res.status(500).json({ error: err.message })
     }
 
@@ -75,10 +74,6 @@ export const login = async (req, res) => {
             } else {
                 return res.status(401).json({ errors: [{ msg: "Password is not correct." }] })
             }
-
-
-
-
 
         } else {
             return res.status(404).json({ errors: [{ msg: "Email not found." }] })
