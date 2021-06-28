@@ -1,4 +1,4 @@
-import { validationResult } from "express-validator"
+import { body, validationResult } from "express-validator"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
@@ -6,6 +6,11 @@ import jwt from "jsonwebtoken"
 import UserModel from "../models/UserModel.js"
 
 
+export const registerValidator = [
+    body("name").not().isEmpty().trim().withMessage("Name is required."),
+    body("email").not().isEmpty().trim().withMessage("Email is required."),
+    body("password").isLength({ min: 6 }).withMessage("Password must be 6 characters long.")
+]
 export const register = async (req, res) => {
     const { name, email, password } = req.body
     const validationError = validationResult(req)
@@ -43,6 +48,14 @@ export const register = async (req, res) => {
         return res.status(500).json({ error: err.message })
     }
 
+}
 
+
+
+export const loginValidator = [
+    body("email").not().isEmpty().trim().withMessage("Email is required."),
+    body("password").not().isEmpty().withMessage("Password is required.")
+]
+export const login = (req, res) => {
 
 }
