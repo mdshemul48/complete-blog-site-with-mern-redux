@@ -12,6 +12,8 @@ app.get("/", (req, res) => {
     return res.send("hello world")
 })
 
-app.listen(5000, () => {
+
+const PORT = process.env.PORT
+app.listen(PORT, () => {
     console.log("api rocks on http://localhost:5000")
 })
