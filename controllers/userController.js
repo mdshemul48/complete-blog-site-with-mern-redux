@@ -1,8 +1,7 @@
 import { body, validationResult } from "express-validator"
 import bcrypt from "bcryptjs"
-import jwt from "jsonwebtoken"
 
-
+import createToken from "../util/token.js"
 import UserModel from "../models/UserModel.js"
 
 
@@ -33,8 +32,7 @@ export const register = async (req, res) => {
         try {
             const user = await UserModel.create({ name, email, password: hashedPassword })
 
-            const token = jwt.sign({ user }, process.env.SECRET, { expiresIn: "7d" })
-
+            const token = createToken(user)
 
             return res.status(201).json({ msg: "Your account has been created.", token })
         } catch (err) {
@@ -56,6 +54,39 @@ export const loginValidator = [
     body("email").not().isEmpty().trim().withMessage("Email is required."),
     body("password").not().isEmpty().withMessage("Password is required.")
 ]
-export const login = (req, res) => {
+export const login = async (req, res) => {
+    const validationError = validationResult(req)
+    if (!validationError.isEmpty()) {
+        return res.status(422).json({ errors: validationError.array() })
+    }
+
+    const { email, password } = req.body
+
+    try {
+        const user = await UserModel.findOne({ email })
+
+        if (user) {
+            const comparedPassword = await bcrypt.compare(password, user.password)
+            if (comparedPassword) {
+                const token = createToken(user)
+
+                return res.status(200).json({ msg: "You have login successfully", token })
+
+            } else {
+                return res.status(401).json({ errors: [{ msg: "Password is not correct." }] })
+            }
+
+
+
+
+
+        } else {
+            return res.status(404).json({ errors: [{ msg: "Email not found." }] })
+        }
+
+    } catch (err) {
+        return res.status(500).json({ errors: err })
+    }
+
 
 }
