@@ -4,7 +4,7 @@ import { Router } from "express";
 import { register } from "../controllers/userController.js";
 
 // validators
-import { registerValidator } from "../middleware/registerMiddleware.js";
+import { registerValidator } from "../middleware/registerValidator.js";
 
 const router = Router()
 
