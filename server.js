@@ -1,6 +1,6 @@
 import dotenv from "dotenv"
 import express from "express"
-
+import bodyParser from "body-parser"
 // castom module and config
 import connectDB from "./config/database.js"
 
@@ -8,7 +8,11 @@ import connectDB from "./config/database.js"
 import userRouter from "./routes/userRoutes.js"
 
 dotenv.config()
+
 const app = express()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // connecting mongodb database 
 connectDB()
