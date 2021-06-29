@@ -1,4 +1,7 @@
 @import "scss/base/reset";
 
+// import css abstracts
+@import "scss/abstracts/variables.scss";
+
 // import scss components
 @import "scss/components/_navbar.scss";
