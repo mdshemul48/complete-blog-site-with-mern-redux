@@ -1,9 +1,14 @@
 
 import React from 'react'
-
+import { Helmet } from "react-helmet"
 const Home = () => {
     return (
-        <h1>home</h1>
+        <>
+            <Helmet>
+                <title>Web articles</title>
+                <meta name="description" content="Learn html, css, and javascript" />
+            </Helmet>
+        </>
     )
 }
 
