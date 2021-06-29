@@ -5,3 +5,20 @@
 .mt-80 {
   margin-top: 8rem;
 }
+
+.group {
+  margin-bottom: 1.3rem;
+  &__control {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: $silver;
+    outline: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.5s;
+    &:focus {
+      border-bottom-color: $green;
+    }
+  }
+}
+
