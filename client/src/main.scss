@@ -1,7 +1,8 @@
 @import "scss/base/reset";
 
 // import scss abstracts
-@import "scss/abstracts/variables.scss";
+@import "scss/abstracts/_variables.scss";
+@import "scss/abstracts/_mixin.scss";
 
 // import scss utils
 @import "scss/utils/_utils.scss";
