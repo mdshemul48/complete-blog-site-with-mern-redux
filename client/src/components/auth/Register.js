@@ -2,7 +2,18 @@ import React from 'react'
 
 const Register = () => {
     return (
-        <h1>register page</h1>
+        <>
+            <div className="row mt-80">
+                <div className="col-8">
+                    <div className="bgImage">
+                        
+                    </div>
+                </div>
+                <div className="col-4">
+
+                </div>
+            </div>
+        </>
     )
 }
 
