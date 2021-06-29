@@ -13,6 +13,9 @@ const Register = () => {
                         <div className="account__section">
                             <form >
                                 <div className="group">
+                                    <h3 className="form-heading">Register</h3>
+                                </div>
+                                <div className="group">
                                     <input type="text" name="" className="group__control" placeholder="Enter Name" />
                                 </div>
                                 <div className="group">

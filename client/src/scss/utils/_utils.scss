@@ -30,6 +30,7 @@
   padding: 1.2rem 1rem;
   text-align: center;
   font-size: 1.4rem;
+  text-transform: uppercase;
   border: none;
   cursor: pointer;
 }
@@ -41,4 +42,9 @@
 .btn-block {
   width: 100%;
   height: 5rem !important;
+}
+
+.form-heading {
+  font-size: 2rem;
+  font-weight: 400;
 }
