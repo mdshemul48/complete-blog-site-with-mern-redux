@@ -8,4 +8,8 @@
     width: 0;
     height: 0;
   }
+  @include responsive(tablet) {
+    width: 0;
+    height: 0;
+  }
 }
