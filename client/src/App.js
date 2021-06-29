@@ -3,9 +3,11 @@ import "./main.scss";
 import Home from "./components/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import NavBar from "./components/NavBar";
 function App() {
   return (
     <Router>
+      <NavBar />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/register" exact component={Register} />
