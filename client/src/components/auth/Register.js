@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Helmet } from "react-helmet"
 import toast, { Toaster } from "react-hot-toast"
 import { postRegister } from '../../store/asyncMethods/AuthMethods'
-
+ff
 
 import BgImage from './BgImage'
 const Register = () => {
