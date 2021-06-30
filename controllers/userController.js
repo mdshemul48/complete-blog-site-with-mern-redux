@@ -22,7 +22,7 @@ export const register = async (req, res) => {
     try {
         const checkUser = await UserModel.findOne({ email })
         if (checkUser) {
-            return res.status(403).json({ error: [{ msg: "Email is already taken." }] })
+            return res.status(403).json({ errors: [{ msg: "Email is already taken." }] })
         }
 
         // hashing the password 
@@ -36,7 +36,7 @@ export const register = async (req, res) => {
 
             return res.status(201).json({ msg: "Your account has been created.", token })
         } catch (err) {
-            return res.status(500).json({ error: err })
+            return res.status(500).json({ errors: err })
         }
 
 
