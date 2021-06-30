@@ -5,6 +5,13 @@ const initState = {
 }
 
 const AuthReducer = (state = initState, action) => {
-    return state
+    if (action.type === "SET_LOADER") {
+        return { ...state, loading: true }
+    } else if (action.type === "CLOSE_LOADER") {
+        return { ...state, loading: false }
+    } else {
+        return state
+    }
+
 }
 export default AuthReducer
