@@ -13,6 +13,7 @@ export const postRegister = (formState) => {
             console.log(response)
 
         } catch (err) {
+            console.log(err.response)
             dispatch({ type: "CLOSE_LOADER" })
             dispatch({ type: "REGISTER_ERRORS", payload: err.response.data.errors })
         }
