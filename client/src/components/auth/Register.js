@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Helmet } from "react-helmet"
 import { postRegister } from '../../store/asyncMethods/AuthMethods'
 
@@ -11,7 +11,7 @@ const Register = () => {
         email: "",
         password: "",
     })
-
+    const { loading, registerError } = useSelector((state) => state.AuthReducer)
     const dispatch = useDispatch()
 
     const inputHandler = event => {
@@ -54,7 +54,7 @@ const Register = () => {
                                     <input type="password" name="password" value={formState.password} className="group__control" placeholder="Create Password" onChange={inputHandler} />
                                 </div>
                                 <div className="group">
-                                    <input type="submit" className="btn btn-default btn-block" value="Register" />
+                                    <input type="submit" className="btn btn-default btn-block" value={loading ? "..." : "Register"} />
 
                                 </div>
                             </form>

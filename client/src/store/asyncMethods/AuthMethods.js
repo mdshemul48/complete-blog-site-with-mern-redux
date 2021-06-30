@@ -10,12 +10,10 @@ export const postRegister = (formState) => {
         dispatch({ type: "SET_LOADER" })
         try {
             const response = await axios.post("/register", formState, config)
-            console.log('gg')
-            dispatch({ type: "CLOSE_LOADER" })
             console.log(response)
 
         } catch (err) {
-            console.log(err.response)
+            dispatch({ type: "CLOSE_LOADER" })
             dispatch({ type: "REGISTER_ERRORS", payload: err.response.data.errors })
         }
     }
