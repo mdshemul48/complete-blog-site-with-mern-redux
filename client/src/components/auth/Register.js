@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux"
 import { Helmet } from "react-helmet"
-import axios from "axios"
+import { postRegister } from '../../store/asyncMethods/AuthMethods'
 
 
 import BgImage from './BgImage'
@@ -22,21 +22,7 @@ const Register = () => {
 
     const registerSubmitHandler = async (event) => {
         event.preventDefault()
-        const config = {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }
-        dispatch({ type: "SET_LOADER" })
-        try {
-            const response = await axios.post("/register", formState, config)
-            console.log('gg')
-            dispatch({ type: "CLOSE_LOADER" })
-            console.log(response)
-
-        } catch (err) {
-            console.log(err.response)
-        }
+        dispatch(postRegister(formState))
 
 
     }
