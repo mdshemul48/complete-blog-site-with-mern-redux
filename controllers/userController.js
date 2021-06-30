@@ -15,7 +15,7 @@ export const register = async (req, res) => {
     const validationError = validationResult(req)
 
     if (!validationError.isEmpty()) {
-        return res.status(401).json(validationError.array())
+        return res.status(400).json({ errors: validationError.array() })
     }
 
 
