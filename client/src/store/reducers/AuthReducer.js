@@ -1,8 +1,27 @@
+import jwtDecode from "jwt-decode"
+
 const initState = {
     loading: false,
     registerErrors: [],
-    loginError: []
+    loginError: [],
+    token: "",
+    user: {}
 }
+
+const token = localStorage.getItem('myToken')
+if (token) {
+    const decodedInfo = jwtDecode(token)
+    const expiresIn = new Date(decodedInfo.exp * 1000)
+    if (new Date() > expiresIn) {
+        localStorage.removeItem('myToken')
+    } else {
+        initState.token = token
+        const { user } = decodedInfo
+        initState.user = user
+
+    }
+}
+
 
 const AuthReducer = (state = initState, action) => {
     if (action.type === "SET_LOADER") {

@@ -10,7 +10,8 @@ export const postRegister = (formState) => {
         dispatch({ type: "SET_LOADER" })
         try {
             const { data } = await axios.post("/register", formState, config)
-            console.log(data)
+            dispatch({ type: "CLOSE_LOADER" })
+            localStorage.setItem("myToken", data.token)
 
         } catch (err) {
             console.log(err.response)
