@@ -9,8 +9,8 @@ export const postRegister = (formState) => {
         }
         dispatch({ type: "SET_LOADER" })
         try {
-            const response = await axios.post("/register", formState, config)
-            console.log(response)
+            const { data } = await axios.post("/register", formState, config)
+            console.log(data)
 
         } catch (err) {
             console.log(err.response)
