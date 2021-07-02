@@ -7,7 +7,7 @@ import Home from "./components/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import NavBar from "./components/NavBar";
-
+import Dashboard from "./components/Dashboard"
 import Store from "./store";
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/register" exact component={Register} />
           <Route path="/login" exact component={Login} />
+          <Route path="/Dashboard" exact component={Dashboard} />
         </Switch>
       </Router>
     </Provider>

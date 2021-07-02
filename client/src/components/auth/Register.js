@@ -5,13 +5,13 @@ import toast, { Toaster } from "react-hot-toast"
 import { postRegister } from '../../store/asyncMethods/AuthMethods'
 
 import BgImage from './BgImage'
-const Register = () => {
+const Register = (props) => {
     const [formState, setFormState] = useState({
         name: "",
         email: "",
         password: "",
     })
-    const { loading, registerErrors } = useSelector((state) => state.AuthReducer)
+    const { loading, registerErrors, user } = useSelector((state) => state.AuthReducer)
     const dispatch = useDispatch()
 
     const inputHandler = event => {
@@ -31,7 +31,10 @@ const Register = () => {
         if (registerErrors.length > 0) {
             registerErrors.map(err => toast.error(err.msg))
         }
-    }, [registerErrors])
+        if (user) {
+            props.history.push("/dashboard")
+        }
+    }, [registerErrors, user, props.history])
 
     return (
         <>
