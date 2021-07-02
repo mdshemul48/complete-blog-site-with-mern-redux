@@ -36,7 +36,7 @@ export const register = async (req, res) => {
 
             return res.status(201).json({ msg: "Your account has been created.", token })
         } catch (err) {
-            return res.status(500).json({ errors: err.message })
+            return res.status(500).json({ errors: [{ msg: err.message }] })
         }
 
 
