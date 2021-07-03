@@ -8,18 +8,23 @@ const initState = {
     user: ""
 }
 
-const token = localStorage.getItem('myToken')
-if (token) {
+const verifyToken = (token) => {
     const decodedInfo = jwtDecode(token)
     const expiresIn = new Date(decodedInfo.exp * 1000)
     if (new Date() > expiresIn) {
         localStorage.removeItem('myToken')
-    } else {
-        initState.token = token
-        const { user } = decodedInfo
-        initState.user = user
-
     }
+    else {
+        return decodedInfo
+    }
+}
+
+const token = localStorage.getItem('myToken')
+if (token) {
+    const decodedInfo = verifyToken(token)
+    initState.token = token
+    const { user } = decodedInfo
+    initState.user = user
 }
 
 
