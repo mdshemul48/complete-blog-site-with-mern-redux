@@ -5,7 +5,7 @@ const initState = {
     registerErrors: [],
     loginError: [],
     token: "",
-    user: {}
+    user: ""
 }
 
 const token = localStorage.getItem('myToken')
@@ -32,6 +32,9 @@ const AuthReducer = (state = initState, action) => {
     } else if (action.type === "REGISTER_ERRORS") {
         return { ...state, registerErrors: action.payload }
 
+
+    } else if (action.type === "SET_TOKEN") {
+        return { ...state, token: action.payload }
     } else {
         return state
     }
