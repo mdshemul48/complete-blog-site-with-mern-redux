@@ -11,7 +11,7 @@ const Register = (props) => {
         email: "",
         password: "",
     })
-    const { loading, registerErrors, user } = useSelector((state) => state.AuthReducer)
+    const { loading, registerErrors } = useSelector((state) => state.AuthReducer)
     const dispatch = useDispatch()
 
     const inputHandler = event => {
@@ -31,10 +31,7 @@ const Register = (props) => {
         if (registerErrors.length > 0) {
             registerErrors.map(err => toast.error(err.msg))
         }
-        if (user) {
-            props.history.push("/dashboard")
-        }
-    }, [registerErrors, user, props.history])
+    }, [registerErrors, props.history])
 
     return (
         <>
