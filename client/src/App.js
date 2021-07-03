@@ -10,15 +10,16 @@ import NavBar from "./components/NavBar";
 import Dashboard from "./components/Dashboard"
 import Store from "./store";
 import PrivateRoute from "./private/PrivateRoute"
+import RouteLinks from "./private/RouteLinks";
 function App() {
   return (
     <Provider store={Store}>
       <Router>
         <NavBar />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/register" exact component={Register} />
-          <Route path="/login" exact component={Login} />
+          <RouteLinks path="/" exact component={Home} />
+          <RouteLinks path="/register" exact component={Register} />
+          <RouteLinks path="/login" exact component={Login} />
           <PrivateRoute path="/Dashboard" exact component={Dashboard} />
         </Switch>
       </Router>
