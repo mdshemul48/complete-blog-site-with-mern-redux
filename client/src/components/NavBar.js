@@ -6,7 +6,7 @@ const NavBar = () => {
 
     const Links = user ? <div className="navbar__right">
         <li>
-            <span >{user.name}</span>
+            <Link to="/profile">{user.name}</Link>
         </li>
         <li>
             <Link to="/logout">Logout</Link>
