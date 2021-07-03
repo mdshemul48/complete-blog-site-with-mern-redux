@@ -8,18 +8,23 @@ const initState = {
     user: ""
 }
 
-const token = localStorage.getItem('myToken')
-if (token) {
+const verifyToken = (token) => {
     const decodedInfo = jwtDecode(token)
     const expiresIn = new Date(decodedInfo.exp * 1000)
     if (new Date() > expiresIn) {
         localStorage.removeItem('myToken')
-    } else {
-        initState.token = token
-        const { user } = decodedInfo
-        initState.user = user
-
     }
+    else {
+        return decodedInfo
+    }
+}
+
+const token = localStorage.getItem('myToken')
+if (token) {
+    const decodedInfo = verifyToken(token)
+    initState.token = token
+    const { user } = decodedInfo
+    initState.user = user
 }
 
 
@@ -34,7 +39,12 @@ const AuthReducer = (state = initState, action) => {
 
 
     } else if (action.type === "SET_TOKEN") {
-        return { ...state, token: action.payload }
+        const decoded = verifyToken(action.payload)
+        const { user } = decoded
+
+        return { ...state, token: action.payload, user }
+
+
     } else {
         return state
     }
