@@ -32,7 +32,6 @@ const Register = (props) => {
             registerErrors.map(err => toast.error(err.msg))
         }
         if (user) {
-            console.log("SET_TOKEN--", user)
             props.history.push("/dashboard")
         }
     }, [registerErrors, user, props.history])
