@@ -39,7 +39,12 @@ const AuthReducer = (state = initState, action) => {
 
 
     } else if (action.type === "SET_TOKEN") {
-        return { ...state, token: action.payload }
+        const decoded = verifyToken(action.payload)
+        const { user } = decoded
+
+        return { ...state, token: action.payload, user }
+
+
     } else {
         return state
     }
