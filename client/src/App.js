@@ -11,16 +11,18 @@ import Dashboard from "./components/Dashboard"
 import Store from "./store";
 import PrivateRoute from "./private/PrivateRoute"
 import RouteLinks from "./private/RouteLinks";
+import NotFound from "./components/auth/NotFound";
 function App() {
   return (
     <Provider store={Store}>
       <Router>
         <NavBar />
         <Switch>
-          <RouteLinks path="/" exact component={Home} />
+          <Route path="/" exact component={Home} />
           <RouteLinks path="/register" exact component={Register} />
           <RouteLinks path="/login" exact component={Login} />
           <PrivateRoute path="/Dashboard" exact component={Dashboard} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </Provider>
