@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
-
+import { useDispatch } from 'react-redux'
 import BgImage from './BgImage'
+import { postLogin } from '../../store/asyncMethods/LoginMethods'
+
+
 const Login = () => {
+    const dispatch = useDispatch()
+    const [input, setInput] = useState({
+        email: "",
+        password: ""
+    })
+
+    const inputHandler = (event) => {
+        const { name, value } = event.target
+        console.log(name, value)
+        setInput((prevState) => {
+            return { ...prevState, [name]: value }
+        })
+    }
+    const loginHandler = (event) => {
+        event.preventDefault()
+
+        dispatch(postLogin(input))
+    }
+
+
+
     return (
         <>
             <Helmet>
@@ -16,15 +40,15 @@ const Login = () => {
                 <div className="col-4">
                     <div className="account">
                         <div className="account__section">
-                            <form >
+                            <form onSubmit={loginHandler} >
                                 <div className="group">
                                     <h3 className="form-heading">Login</h3>
                                 </div>
                                 <div className="group">
-                                    <input type="email" name="" className="group__control" placeholder="Enter Email" />
+                                    <input type="email" name="email" className="group__control" placeholder="Enter Email" onChange={inputHandler} />
                                 </div>
                                 <div className="group">
-                                    <input type="password" name="" className="group__control" placeholder="Create Password" />
+                                    <input type="password" name="password" className="group__control" placeholder="Create Password" onChange={inputHandler} />
                                 </div>
                                 <div className="group">
                                     <input type="submit" className="btn btn-default btn-block" value="Login" />
