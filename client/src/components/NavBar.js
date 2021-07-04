@@ -1,8 +1,16 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { LOGOUT } from "../store/types/UserTypes"
 const NavBar = () => {
+    const dispatch = useDispatch()
     const { user } = useSelector((state) => state.AuthReducer)
+
+
+    const logoutHandler = () => {
+        localStorage.removeItem("myToken")
+        dispatch({ type: LOGOUT })
+    }
 
     const Links = user ? <div className="navbar__right">
         <li>
@@ -12,7 +20,7 @@ const NavBar = () => {
             <span>{user.name}</span>
         </li>
         <li>
-            <span>Logout</span>
+            <span onClick={logoutHandler}>Logout</span>
         </li>
     </div> : <div className="navbar__right">
         <li>

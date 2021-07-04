@@ -45,6 +45,8 @@ const AuthReducer = (state = initState, action) => {
         return { ...state, token: action.payload, user }
 
 
+    } else if (action.type === "LOGOUT") {
+        return { ...state, token: "", user: "" }
     } else {
         return state
     }
