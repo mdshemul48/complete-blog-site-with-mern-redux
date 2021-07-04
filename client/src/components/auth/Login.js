@@ -58,10 +58,10 @@ const Login = () => {
                                     <h3 className="form-heading">Login</h3>
                                 </div>
                                 <div className="group">
-                                    <input type="email" name="email" className="group__control" placeholder="Enter Email" onChange={inputHandler} />
+                                    <input type="email" name="email" className="group__control" placeholder="Enter Email" value={input.email} onChange={inputHandler} />
                                 </div>
                                 <div className="group">
-                                    <input type="password" name="password" className="group__control" placeholder="Create Password" onChange={inputHandler} />
+                                    <input type="password" name="password" className="group__control" placeholder="Create Password" value={input.password} onChange={inputHandler} />
                                 </div>
                                 <div className="group">
                                     <input type="submit" className="btn btn-default btn-block" value="Login" />
