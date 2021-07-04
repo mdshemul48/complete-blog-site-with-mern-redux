@@ -17,12 +17,12 @@ const NavBar = () => {
             <Link to="create">Create Post</Link>
         </li>
         <li>
-            <span>{user.name}</span>
+            <Link to="dashboard">{user.name}</Link>
         </li>
         <li>
             <span onClick={logoutHandler}>Logout</span>
         </li>
-    </div> : <div className="navbar__right">
+    </div > : <div className="navbar__right">
         <li>
             <Link to="/login">Login</Link>
         </li>
