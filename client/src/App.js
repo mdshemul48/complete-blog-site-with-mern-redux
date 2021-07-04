@@ -21,7 +21,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <RouteLinks path="/register" exact component={Register} />
           <RouteLinks path="/login" exact component={Login} />
-          <PrivateRoute path="/Dashboard" exact component={Dashboard} />
+          <PrivateRoute path="/dashboard" exact component={Dashboard} />
           <Route component={NotFound} />
         </Switch>
       </Router>
