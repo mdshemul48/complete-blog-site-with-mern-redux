@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { Toaster, toast } from "react-hot-toast"
 import BgImage from './BgImage'
 import { postLogin } from '../../store/asyncMethods/LoginMethods'
 
 
 const Login = () => {
     const dispatch = useDispatch()
+    const { loginError } = useSelector(state => state.AuthReducer)
     const [input, setInput] = useState({
         email: "",
         password: ""
@@ -25,7 +27,9 @@ const Login = () => {
         dispatch(postLogin(input))
     }
 
-
+    useEffect(() => {
+        loginError.map((error) => toast.error(error.msg))
+    }, [loginError])
 
     return (
         <>
@@ -33,6 +37,15 @@ const Login = () => {
                 <title>User Login</title>
                 <meta name="description" content="User login form" />
             </Helmet>
+            <Toaster position="top-right"
+                reverseOrder={false}
+                toastOptions={{
+                    className: '',
+                    style: {
+                        fontSize: "15px"
+
+                    }
+                }} />
             <div className="row mt-80">
                 <div className="col-8">
                     <BgImage />
