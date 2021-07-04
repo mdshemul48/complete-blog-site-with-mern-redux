@@ -6,10 +6,13 @@ const NavBar = () => {
 
     const Links = user ? <div className="navbar__right">
         <li>
+            <Link to="create">Create Post</Link>
+        </li>
+        <li>
             <span>{user.name}</span>
         </li>
         <li>
-            <Link to="/logout">Logout</Link>
+            <span>Logout</span>
         </li>
     </div> : <div className="navbar__right">
         <li>
