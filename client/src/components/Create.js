@@ -6,10 +6,20 @@ import 'react-quill/dist/quill.snow.css';
 const Create = () => {
   const [currentImage, setCurrentImage] = useState("Choose image")
   const [blogPost, setBlogPost] = useState("")
-  console.log(blogPost)
+  const [formState, setFormState] = useState({
+    title: "",
+
+  })
   const fileHandler = (event) => {
     setCurrentImage(event.target.files[0].name)
   }
+
+  const inputHandler = (event) => {
+    setFormState(prevState => {
+      return { ...prevState, [event.target.name]: event.target.value }
+    })
+  }
+
 
   return <div className="create mt-100">
     <Helmet>
@@ -26,7 +36,7 @@ const Create = () => {
                 <label htmlFor="title">
                   Post Title
                 </label>
-                <input type="text" name="title" id="title" className="group__control" placeholder="Post Title..." />
+                <input type="text" name="title" id="title" value={formState.title} onChange={inputHandler} className="group__control" placeholder="Post Title..." />
               </div>
               <div className="group">
                 <label htmlFor="image" className="image__label">{currentImage}</label>
