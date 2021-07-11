@@ -77,3 +77,15 @@ label {
   font-size: 1.3rem;
   margin-bottom: 0.4rem;
 }
+
+#image {
+  display: none;
+}
+
+.image__label {
+  display: block;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: $green;
+  cursor: pointer;
+}

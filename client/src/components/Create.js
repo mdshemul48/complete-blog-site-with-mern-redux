@@ -18,6 +18,10 @@ const Create = () => {
                 </label>
                 <input type="text" name="title" id="title" className="group__control" placeholder="Post Title..." />
               </div>
+              <div className="group">
+                <label htmlFor="image" className="image__label">Choose image</label>
+                <input type="file" name="picture" id="image" />
+              </div>
             </form>
           </div>
         </div>
