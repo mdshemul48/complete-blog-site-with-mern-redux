@@ -17,7 +17,9 @@
 .mt-80 {
   margin-top: 8rem;
 }
-
+.mt-100 {
+  margin-top: 10rem;
+}
 .group {
   margin-bottom: 1.3rem;
   &__control {
@@ -59,4 +61,16 @@
 .form-heading {
   font-size: 2rem;
   font-weight: 400;
+}
+
+.card {
+  background-color: $white;
+  padding: 1.5rem;
+  &__h3 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+}
+label {
 }

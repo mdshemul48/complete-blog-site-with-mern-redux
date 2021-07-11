@@ -12,6 +12,8 @@ import Store from "./store";
 import PrivateRoute from "./private/PrivateRoute"
 import RouteLinks from "./private/RouteLinks";
 import NotFound from "./components/auth/NotFound";
+import Create from "./components/Create";
+
 function App() {
   return (
     <Provider store={Store}>
@@ -22,6 +24,7 @@ function App() {
           <RouteLinks path="/register" exact component={Register} />
           <RouteLinks path="/login" exact component={Login} />
           <PrivateRoute path="/dashboard" exact component={Dashboard} />
+          <PrivateRoute path="/create" exact component={Create} />
           <Route component={NotFound} />
         </Switch>
       </Router>
