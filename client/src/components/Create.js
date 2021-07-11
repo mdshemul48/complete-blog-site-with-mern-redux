@@ -1,8 +1,12 @@
-import React, { useState, } from "react";
+import React, { useState } from "react";
+import ReactQuill from 'react-quill';
 import Helmet from "react-helmet";
+
+import 'react-quill/dist/quill.snow.css';
 const Create = () => {
   const [currentImage, setCurrentImage] = useState("Choose image")
-
+  const [blogPost, setBlogPost] = useState("")
+  console.log(blogPost)
   const fileHandler = (event) => {
     setCurrentImage(event.target.files[0].name)
   }
@@ -27,6 +31,14 @@ const Create = () => {
               <div className="group">
                 <label htmlFor="image" className="image__label">{currentImage}</label>
                 <input type="file" name="picture" id="image" onChange={fileHandler} />
+              </div>
+              <div className="group">
+                <label htmlFor="body">
+                  <ReactQuill theme="snow" value={blogPost} onChange={setBlogPost} />
+                </label>
+              </div>
+              <div className="group">
+                <input type="submit" value="Create post" className="btn btn-default btn-block" />
               </div>
             </form>
           </div>
