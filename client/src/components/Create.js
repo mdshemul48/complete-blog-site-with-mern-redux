@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import 'react-quill/dist/quill.snow.css';
 const Create = () => {
   const [currentImage, setCurrentImage] = useState("Choose image")
+  const [imagePreview, setImagePreview] = useState("")
   const [blogPost, setBlogPost] = useState("")
   const [formState, setFormState] = useState({
     title: "",
@@ -15,6 +16,11 @@ const Create = () => {
   const [slugButton, setSlugButton] = useState(false)
   const fileHandler = (event) => {
     setCurrentImage(event.target.files[0].name)
+    const imageReader = new FileReader()
+    imageReader.onloadend = () => {
+      setImagePreview(imageReader.result)
+    }
+    imageReader.readAsDataURL(event.target.files[0])
   }
 
   const inputHandler = (event) => {
@@ -78,6 +84,17 @@ const Create = () => {
               <div className="group">
                 {slugButton ? <button className="btn btn-default" onClick={slugURLHandler}>Update Slug</button> : ""}
               </div>
+              <div className="group">
+                <div className="">
+                  {imagePreview ? <img className="imagePreview" src={imagePreview} alt="gg" /> : ""}
+                </div>
+              </div>
+
+
+
+
+
+
             </div>
           </div>
         </div>
