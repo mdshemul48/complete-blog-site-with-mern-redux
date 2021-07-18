@@ -82,8 +82,11 @@ const Create = () => {
                 <ReactQuill id="body" theme="snow" value={blogPost} onChange={setBlogPost} />
               </div>
               <div className="group">
-                <input type="submit" value="Create post" className="btn btn-default btn-block" />
+                <label htmlFor="description">Meta Description</label>
+                <textarea id="description" name="" cols="30" rows="10" defaultValue={formState.description} onChange={descriptionHandler} className="group__control" placeholder="meta description..." maxLength="150"></textarea>
+                <p className="length">{formState.description ? formState.description.length : 0}</p>
               </div>
+
             </div>
           </div>
           <div className="col-6 p-15">
@@ -100,15 +103,10 @@ const Create = () => {
                   {imagePreview ? <img className="imagePreview" src={imagePreview} alt="gg" /> : ""}
                 </div>
               </div>
+
               <div className="group">
-                <label htmlFor="description">Meta Description</label>
-                <textarea id="description" name="" cols="30" rows="10" defaultValue={formState.description} onChange={descriptionHandler} className="group__control" placeholder="meta description..." maxLength="150"></textarea>
-                <p className="length">{formState.description ? formState.description.length : 0}</p>
+                <input type="submit" value="Create post" className="btn btn-default btn-block" />
               </div>
-
-
-
-
 
             </div>
           </div>
