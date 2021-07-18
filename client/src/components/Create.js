@@ -10,6 +10,9 @@ const Create = () => {
     title: "",
 
   })
+
+  const [slug, setSlug] = useState("")
+
   const fileHandler = (event) => {
     setCurrentImage(event.target.files[0].name)
   }
@@ -18,6 +21,9 @@ const Create = () => {
     setFormState(prevState => {
       return { ...prevState, [event.target.name]: event.target.value }
     })
+
+    const createSlug = event.target.value.trim().replaceAll(" ", "-")
+    setSlug(createSlug)
   }
 
 
@@ -59,7 +65,7 @@ const Create = () => {
             <div className="card">
               <div className="group ">
                 <label htmlFor="slug">Post URL</label>
-                <input type="text" name="slug" id="slug" className="group__control" placeholder="post URL..." />
+                <input type="text" name="slug" id="slug" className="group__control" placeholder="post URL..." value={slug} />
               </div>
             </div>
           </div>
