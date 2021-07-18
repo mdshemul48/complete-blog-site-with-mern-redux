@@ -9,11 +9,13 @@ const Create = () => {
   const [blogPost, setBlogPost] = useState("")
   const [formState, setFormState] = useState({
     title: "",
+    description: ""
 
   })
 
   const [slug, setSlug] = useState("")
   const [slugButton, setSlugButton] = useState(false)
+
   const fileHandler = (event) => {
     setCurrentImage(event.target.files[0].name)
     const imageReader = new FileReader()
@@ -22,8 +24,10 @@ const Create = () => {
     }
     imageReader.readAsDataURL(event.target.files[0])
   }
-
-  const inputHandler = (event) => {
+  const descriptionHandler = (event) => {
+    setFormState(prevState => ({ ...prevState, description: event.target.value, }))
+  }
+  const titleHandler = (event) => {
     setFormState(prevState => {
       return { ...prevState, [event.target.name]: event.target.value }
     })
@@ -31,6 +35,7 @@ const Create = () => {
     const createSlug = event.target.value.trim().replaceAll(" ", "-")
     setSlug(createSlug)
   }
+
   const slugHandler = (event) => {
     setSlugButton(true)
     setSlug(event.target.value)
@@ -41,13 +46,18 @@ const Create = () => {
     setSlug(prevState => prevState.trim().replaceAll(" ", "-"))
   }
 
+  const postHandler = (event) => {
+    event.preventDefault()
+  }
+
+
   return <div className="create mt-100">
     <Helmet>
       <title>Create new post</title>
       <meta name="description" content="create a new post" />
     </Helmet>
     <div className="container">
-      <form>
+      <form onSubmit={postHandler}>
         <div className="row ml-minus-15 mr-minus-15">
           <div className="col-6 p-15">
             <div className="card">
@@ -57,7 +67,7 @@ const Create = () => {
                   <label htmlFor="title">
                     Post Title
                   </label>
-                  <input type="text" name="title" id="title" value={formState.title} onChange={inputHandler} className="group__control" placeholder="Post Title..." />
+                  <input type="text" name="title" id="title" value={formState.title} onChange={titleHandler} className="group__control" placeholder="Post Title..." />
                 </div>
                 <div className="group">
                   <label htmlFor="image" className="image__label">{currentImage}</label>
@@ -89,7 +99,11 @@ const Create = () => {
                   {imagePreview ? <img className="imagePreview" src={imagePreview} alt="gg" /> : ""}
                 </div>
               </div>
-
+              <div className="group">
+                <label htmlFor="description">Meta Description</label>
+                <textarea id="description" name="" cols="30" rows="10" defaultValue={formState.description} onChange={descriptionHandler} className="group__control" placeholder="meta description..." maxLength="150"></textarea>
+                <p className="length">{formState.description ? formState.description.length : 0}</p>
+              </div>
 
 
 
