@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import ReactQuill from 'react-quill';
 import Helmet from "react-helmet";
-
 import 'react-quill/dist/quill.snow.css';
+import { useDispatch, useSelector } from 'react-redux'
+import { cerateAction } from '../store/asyncMethods/PostMethods'
+
+
+
 const Create = () => {
+  const dispatch = useDispatch()
+  const { user: { _id: id, name } } = useSelector(state => state.AuthReducer)
+
   const [currentImage, setCurrentImage] = useState("Choose image")
   const [imagePreview, setImagePreview] = useState("")
   const [blogPost, setBlogPost] = useState("")
@@ -50,7 +57,18 @@ const Create = () => {
 
   const postHandler = (event) => {
     event.preventDefault()
-    console.log(formState)
+    const { title, description, image } = formState
+
+    const formData = new FormData()
+    formData.append("title", title)
+    formData.append("description", description)
+    formData.append("image", image)
+    formData.append("slug", slug)
+    formData.append("body", blogPost)
+    formData.append("name", name)
+    formData.append("id", id)
+
+    dispatch(cerateAction(formData))
   }
 
 
@@ -73,7 +91,7 @@ const Create = () => {
               </div>
               <div className="group">
                 <label htmlFor="image" className="image__label">{currentImage}</label>
-                <input type="file" name="picture" id="image" onChange={fileHandler} />
+                <input type="file" name="image" id="image" onChange={fileHandler} />
               </div>
               <div className="group">
                 <label htmlFor="body">
