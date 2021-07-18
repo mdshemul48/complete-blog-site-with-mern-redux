@@ -12,7 +12,7 @@ const Create = () => {
   })
 
   const [slug, setSlug] = useState("")
-
+  const [slugButton, setSlugButton] = useState(false)
   const fileHandler = (event) => {
     setCurrentImage(event.target.files[0].name)
   }
@@ -25,7 +25,15 @@ const Create = () => {
     const createSlug = event.target.value.trim().replaceAll(" ", "-")
     setSlug(createSlug)
   }
+  const slugHandler = (event) => {
+    setSlugButton(true)
+    setSlug(event.target.value)
+  }
 
+  const slugURLHandler = (event) => {
+    event.preventDefault()
+    setSlug(prevState => prevState.trim().replaceAll(" ", "-"))
+  }
 
   return <div className="create mt-100">
     <Helmet>
@@ -63,9 +71,12 @@ const Create = () => {
           </div>
           <div className="col-6 p-15">
             <div className="card">
-              <div className="group ">
+              <div className="group">
                 <label htmlFor="slug">Post URL</label>
-                <input type="text" name="slug" id="slug" className="group__control" placeholder="post URL..." value={slug} />
+                <input type="text" name="slug" id="slug" className="group__control" placeholder="post URL..." value={slug} onChange={slugHandler} />
+              </div>
+              <div className="group">
+                {slugButton ? <button className="btn btn-default" onClick={slugURLHandler}>Update Slug</button> : ""}
               </div>
             </div>
           </div>
