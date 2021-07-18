@@ -23,6 +23,8 @@ const Create = () => {
       setImagePreview(imageReader.result)
     }
     imageReader.readAsDataURL(event.target.files[0])
+    setFormState(prevState => ({ ...prevState, [event.target.name]: event.target.files[0] }))
+
   }
   const descriptionHandler = (event) => {
     setFormState(prevState => ({ ...prevState, description: event.target.value, }))
@@ -48,6 +50,7 @@ const Create = () => {
 
   const postHandler = (event) => {
     event.preventDefault()
+    console.log(formState)
   }
 
 
@@ -62,27 +65,25 @@ const Create = () => {
           <div className="col-6 p-15">
             <div className="card">
               <h3 className="card__h3">Create a new post</h3>
-              <form>
-                <div className="group">
-                  <label htmlFor="title">
-                    Post Title
-                  </label>
-                  <input type="text" name="title" id="title" value={formState.title} onChange={titleHandler} className="group__control" placeholder="Post Title..." />
-                </div>
-                <div className="group">
-                  <label htmlFor="image" className="image__label">{currentImage}</label>
-                  <input type="file" name="picture" id="image" onChange={fileHandler} />
-                </div>
-                <div className="group">
-                  <label htmlFor="body">
-                    Post Body
-                  </label>
-                  <ReactQuill id="body" theme="snow" value={blogPost} onChange={setBlogPost} />
-                </div>
-                <div className="group">
-                  <input type="submit" value="Create post" className="btn btn-default btn-block" />
-                </div>
-              </form>
+              <div className="group">
+                <label htmlFor="title">
+                  Post Title
+                </label>
+                <input type="text" name="title" id="title" value={formState.title} onChange={titleHandler} className="group__control" placeholder="Post Title..." />
+              </div>
+              <div className="group">
+                <label htmlFor="image" className="image__label">{currentImage}</label>
+                <input type="file" name="picture" id="image" onChange={fileHandler} />
+              </div>
+              <div className="group">
+                <label htmlFor="body">
+                  Post Body
+                </label>
+                <ReactQuill id="body" theme="snow" value={blogPost} onChange={setBlogPost} />
+              </div>
+              <div className="group">
+                <input type="submit" value="Create post" className="btn btn-default btn-block" />
+              </div>
             </div>
           </div>
           <div className="col-6 p-15">
