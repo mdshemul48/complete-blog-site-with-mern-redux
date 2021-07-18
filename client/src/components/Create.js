@@ -3,7 +3,7 @@ import ReactQuill from 'react-quill';
 import Helmet from "react-helmet";
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux'
-import { cerateAction } from '../store/asyncMethods/PostMethods'
+import { createAction } from '../store/asyncMethods/PostMethods'
 
 
 
@@ -68,7 +68,7 @@ const Create = () => {
     formData.append("name", name)
     formData.append("id", id)
 
-    dispatch(cerateAction(formData))
+    dispatch(createAction(formData))
   }
 
 
