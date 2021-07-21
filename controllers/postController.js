@@ -20,10 +20,12 @@ export const createPost = (req, res) => {
         if (slug === "") {
             errors.push({ msg: "slug is required" })
         }
-
+        if (Object.keys(files).length === 0) {
+            errors.push({ msg: "You must upload a picture" })
+        }
 
         if (errors.length !== 0) {
-            return res.status(400).json({ errors })
+            return res.status(400).json({ errors, files })
         }
     })
 }
