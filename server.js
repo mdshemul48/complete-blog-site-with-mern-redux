@@ -1,11 +1,13 @@
 import dotenv from "dotenv"
 import express from "express"
 import bodyParser from "body-parser"
-// castom module and config
-import connectDB from "./config/database.js"
 
 // all the routers 
 import userRouter from "./routes/userRoutes.js"
+import postRoutes from "./routes/postRoutes.js"
+
+// castom module and config
+import connectDB from "./config/database.js"
 
 dotenv.config()
 
@@ -18,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 connectDB()
 
 app.use("/", userRouter)
+app.use("/", postRoutes)
 
 
 const PORT = process.env.PORT || 5000

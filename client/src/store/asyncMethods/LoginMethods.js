@@ -19,7 +19,6 @@ export const postLogin = (loginInfo) => {
             localStorage.setItem("myToken", data.token)
         } catch (err) {
             dispatch({ type: LOGIN_ERRORS, payload: err.response.data.errors })
-            console.log(err)
         }
     }
 }
