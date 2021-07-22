@@ -24,13 +24,15 @@ const Create = () => {
   const [slugButton, setSlugButton] = useState(false)
 
   const fileHandler = (event) => {
-    setCurrentImage(event.target.files[0].name)
-    const imageReader = new FileReader()
-    imageReader.onloadend = () => {
-      setImagePreview(imageReader.result)
+    if (event.target.files.length !== 0) {
+      setCurrentImage(event.target.files[0].name)
+      const imageReader = new FileReader()
+      imageReader.onloadend = () => {
+        setImagePreview(imageReader.result)
+      }
+      imageReader.readAsDataURL(event.target.files[0])
+      setFormState(prevState => ({ ...prevState, [event.target.name]: event.target.files[0] }))
     }
-    imageReader.readAsDataURL(event.target.files[0])
-    setFormState(prevState => ({ ...prevState, [event.target.name]: event.target.files[0] }))
 
   }
   const descriptionHandler = (event) => {
