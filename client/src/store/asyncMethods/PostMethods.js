@@ -18,8 +18,7 @@ export const createAction = (postData) => {
             const { errors } = error.response.data
             dispatch({ type: CLOSE_LOADER })
             dispatch({ type: CREATE_ERRORS, payload: errors })
-            console.log(error.message)
-            console.log(error.response)
+
 
         }
     }

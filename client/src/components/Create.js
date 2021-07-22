@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactQuill from 'react-quill';
 import Helmet from "react-helmet";
+import toast, { Toaster } from "react-hot-toast"
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { createAction } from '../store/asyncMethods/PostMethods'
@@ -10,7 +11,8 @@ import { createAction } from '../store/asyncMethods/PostMethods'
 const Create = () => {
   const dispatch = useDispatch()
   const { user: { _id: id, name } } = useSelector(state => state.AuthReducer)
-
+  const { createErrors } = useSelector(state => state.PostReducer)
+  console.log(createErrors)
   const [currentImage, setCurrentImage] = useState("Choose image")
   const [imagePreview, setImagePreview] = useState("")
   const [blogPost, setBlogPost] = useState("")
@@ -73,12 +75,29 @@ const Create = () => {
     dispatch(createAction(formData))
   }
 
-
+  useEffect(() => {
+    console.log(createErrors)
+    if (createErrors.length !== 0) {
+      createErrors.map(err => toast.error(err.msg))
+    }
+  }, [createErrors])
   return <div className="create mt-100">
+
     <Helmet>
       <title>Create new post</title>
       <meta name="description" content="create a new post" />
     </Helmet>
+
+    <Toaster position="top-right"
+      reverseOrder={false}
+      toastOptions={{
+        className: '',
+        style: {
+          fontSize: "15px"
+
+        }
+      }} />
+
     <div className="container">
       <form onSubmit={postHandler}>
         <div className="row ml-minus-15 mr-minus-15">
