@@ -47,5 +47,6 @@ export const createPost = (req, res) => {
         if (errors.length !== 0) {
             return res.status(400).json({ errors, files })
         }
+        return res.status(201).json({ message: "post Created" })
     })
 }

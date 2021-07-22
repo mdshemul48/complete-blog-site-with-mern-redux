@@ -6,14 +6,16 @@ export const createAction = (postData) => {
     return async (dispatch) => {
         dispatch({ type: SET_LOADER })
         try {
+
             const config = {
                 Headers: {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await axios.post("/create_post", postData, config)
-            console.log(data)
+
+            await axios.post("/create_post", postData, config)
             dispatch({ type: CLOSE_LOADER })
+
         } catch (error) {
             const { errors } = error.response.data
             dispatch({ type: CLOSE_LOADER })

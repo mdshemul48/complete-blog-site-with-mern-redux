@@ -12,7 +12,6 @@ const Create = () => {
   const dispatch = useDispatch()
   const { user: { _id: id, name } } = useSelector(state => state.AuthReducer)
   const { createErrors } = useSelector(state => state.PostReducer)
-  console.log(createErrors)
   const [currentImage, setCurrentImage] = useState("Choose image")
   const [imagePreview, setImagePreview] = useState("")
   const [blogPost, setBlogPost] = useState("")
@@ -76,7 +75,6 @@ const Create = () => {
   }
 
   useEffect(() => {
-    console.log(createErrors)
     if (createErrors.length !== 0) {
       createErrors.map(err => toast.error(err.msg))
     }

@@ -15,7 +15,6 @@ export const postRegister = (formState) => {
             localStorage.setItem("myToken", data.token)
             dispatch({ type: SET_TOKEN, payload: data.token })
         } catch (err) {
-            console.log(err.response)
             dispatch({ type: CLOSE_LOADER })
             dispatch({ type: REGISTER_ERRORS, payload: err.response.data.errors })
         }

@@ -16,7 +16,6 @@ const Login = () => {
 
     const inputHandler = (event) => {
         const { name, value } = event.target
-        console.log(name, value)
         setInput((prevState) => {
             return { ...prevState, [name]: value }
         })
