@@ -41,8 +41,8 @@ export const createPost = (req, res) => {
                 const __dirname = dirname(fileURLToPath(import.meta.url));
                 const newPath = __dirname + `/../client/public/images/poster/${files.image.name}`
                 fs.copyFile(files.image.path, newPath, (err) => {
-                    if (err) {
-                        console.log(err)
+                    if (!err) {
+                        console.log("IMAGE uploaded!")
                     }
                 })
 
