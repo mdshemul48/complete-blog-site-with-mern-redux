@@ -21,7 +21,10 @@ const PostReducer = (state = initState, action) => {
         return { ...state, redirect: false }
     } else if (type === SET_MESSAGE) {
         return { ...state, message: action.payload }
-    } else if (type === REMOVE_ERRORS) {
+    } else if (type === REMOVE_MESSAGE) {
+        return { ...state, message: "" }
+    }
+    else if (type === REMOVE_ERRORS) {
         return { ...state, createErrors: [] }
     }
     else {

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet"
 import { useSelector, useDispatch } from "react-redux"
-import { REDIRECT_FALSE } from '../store/types/PostTypes'
+import { REDIRECT_FALSE, REMOVE_MESSAGE } from '../store/types/PostTypes'
 import { Toaster, toast } from "react-hot-toast"
 
 const Dashboard = () => {
@@ -13,6 +13,7 @@ const Dashboard = () => {
         }
         if (message) {
             toast.success(message)
+            dispatch({ type: REMOVE_MESSAGE })
         }
 
     }, [dispatch, redirect, message])
