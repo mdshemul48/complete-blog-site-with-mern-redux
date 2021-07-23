@@ -70,12 +70,8 @@ export const createPost = (req, res) => {
                     }
                 })
 
-
-
-
-
             }
-            return res.status(201).json({ message: "post Created" })
+
         } catch (err) {
             console.log(err)
             return res.status(500).json({ errors: err, msg: err.message })
