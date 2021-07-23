@@ -8,10 +8,10 @@ import { createAction } from '../store/asyncMethods/PostMethods'
 
 
 
-const Create = () => {
+const Create = (props) => {
   const dispatch = useDispatch()
   const { user: { _id: id, name } } = useSelector(state => state.AuthReducer)
-  const { createErrors } = useSelector(state => state.PostReducer)
+  const { createErrors, redirect } = useSelector(state => state.PostReducer)
   const [currentImage, setCurrentImage] = useState("Choose image")
   const [imagePreview, setImagePreview] = useState("")
   const [blogPost, setBlogPost] = useState("")
@@ -75,10 +75,15 @@ const Create = () => {
   }
 
   useEffect(() => {
+
+    if (redirect) {
+      props.history.push("/dashboard")
+    }
+
     if (createErrors.length !== 0) {
       createErrors.map(err => toast.error(err.msg))
     }
-  }, [createErrors])
+  }, [createErrors, redirect])
   return <div className="create mt-100">
 
     <Helmet>

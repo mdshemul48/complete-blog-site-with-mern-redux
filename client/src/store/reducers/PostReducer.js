@@ -1,8 +1,10 @@
-import { SET_LOADER, CLOSE_LOADER, CREATE_ERRORS } from "../types/PostTypes"
+import { SET_LOADER, CLOSE_LOADER, CREATE_ERRORS, REDIRECT_TRUE, REDIRECT_FALSE, SET_MESSAGE, REMOVE_MESSAGE } from "../types/PostTypes"
 
 const initState = {
     loading: false,
-    createErrors: []
+    createErrors: [],
+    redirect: false,
+    message: ""
 }
 
 const PostReducer = (state = initState, action) => {
@@ -13,9 +15,15 @@ const PostReducer = (state = initState, action) => {
         return { ...state, loading: false }
     } else if (type === CREATE_ERRORS) {
         return { ...state, createErrors: payload }
+    } else if (type === REDIRECT_TRUE) {
+        return { ...state, redirect: true }
+    } else if (type === SET_MESSAGE) {
+        return { ...state, message: action.payload }
+    }
+    else {
+        return state
     }
 
-    return state
 }
 
 export default PostReducer
