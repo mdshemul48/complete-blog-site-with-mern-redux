@@ -7,7 +7,7 @@ const initState = {
     message: ""
 }
 
-const PostReducer = (state = initState, action) => {
+export const PostReducer = (state = initState, action) => {
     const { type, payload } = action
     if (action.type === SET_LOADER) {
         return { ...state, loading: true }
@@ -33,4 +33,3 @@ const PostReducer = (state = initState, action) => {
 
 }
 
-export default PostReducer
