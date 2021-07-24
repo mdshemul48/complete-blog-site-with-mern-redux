@@ -78,3 +78,8 @@ export const createPost = (req, res) => {
         }
     })
 }
+
+
+export const fetchPosts = (req, res) => {
+
+}
