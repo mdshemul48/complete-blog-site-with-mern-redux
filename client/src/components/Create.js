@@ -83,7 +83,7 @@ const Create = (props) => {
     if (createErrors.length !== 0) {
       createErrors.map(err => toast.error(err.msg))
     }
-  }, [createErrors, redirect])
+  }, [createErrors, redirect, props.history])
   return <div className="create mt-100">
 
     <Helmet>

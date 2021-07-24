@@ -7,6 +7,8 @@ import { fetchPosts } from '../store/asyncMethods/PostMethods'
 import { Link } from 'react-router-dom'
 import { BsPencil, BsArchive } from "react-icons/bs"
 
+import Loader from './Loader'
+import Sidebar from './sidebar'
 const Dashboard = () => {
     const { redirect, message, loading } = useSelector(state => state.PostReducer)
     const { user: { _id: id } } = useSelector(state => state.AuthReducer)
@@ -40,11 +42,11 @@ const Dashboard = () => {
                     }
                 }} />
             <div className="container mt-100">
-                <div className="row">
-                    <div className="col-3">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam provident deleniti consectetur quos praesentium, mollitia soluta adipisci aperiam, harum saepe quo quam aut accusantium commodi debitis perspiciatis amet beatae sapiente.
+                <div className="row ml-minus-15 mr-minus-15">
+                    <div className="col-3 p-15">
+                        <Sidebar />
                     </div>
-                    <div className="col-9">
+                    <div className="col-9 p-15">
                         {!loading ? posts.length > 0 ? posts.map(
                             (post) => {
                                 return <div className="dashboard__posts" key={post._id}>
@@ -58,7 +60,7 @@ const Dashboard = () => {
 
                                 </div>
                             }
-                        ) : "you dont have any post" : "loading"}
+                        ) : "you dont have any post" : <Loader />}
                     </div>
                 </div>
             </div>
