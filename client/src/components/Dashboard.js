@@ -45,8 +45,8 @@ const Dashboard = () => {
                     <div className="col-9">
                         {!loading ? posts.length > 0 ? posts.map(
                             (post) => {
-                                return <div className="dashboard__post" key={post._id}>
-                                    <div className="dashboard_post__title">
+                                return <div className="dashboard__posts" key={post._id}>
+                                    <div className="dashboard__posts__title">
                                         <Link to="/">{post.title}</Link>
                                     </div>
                                 </div>
