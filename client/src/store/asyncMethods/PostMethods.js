@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CREATE_ERRORS, REMOVE_ERRORS, SET_LOADER, CLOSE_LOADER, REDIRECT_FALSE, REDIRECT_TRUE, SET_MESSAGE } from '../types/PostTypes'
+import { CREATE_ERRORS, REMOVE_ERRORS, SET_LOADER, CLOSE_LOADER, REDIRECT_FALSE, REDIRECT_TRUE, SET_MESSAGE, SET_POSTS } from '../types/PostTypes'
 
 export const createAction = (postData) => {
     return async (dispatch, getState) => {
@@ -40,7 +40,8 @@ export const fetchPosts = (id) => {
             dispatch({ type: SET_LOADER })
             const { data: { response } } = await axios.get(`/posts/${id}`, config)
             dispatch({ type: CLOSE_LOADER })
-            console.log(response)
+            dispatch({ type: SET_POSTS, payload: response })
+
         } catch (error) {
             console.log(error.response);
             dispatch({ type: CLOSE_LOADER })

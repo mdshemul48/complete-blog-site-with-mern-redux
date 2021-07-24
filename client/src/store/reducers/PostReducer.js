@@ -1,10 +1,11 @@
-import { SET_LOADER, CLOSE_LOADER, CREATE_ERRORS, REMOVE_ERRORS, REDIRECT_TRUE, REDIRECT_FALSE, SET_MESSAGE, REMOVE_MESSAGE } from "../types/PostTypes"
+import { SET_LOADER, CLOSE_LOADER, CREATE_ERRORS, REMOVE_ERRORS, REDIRECT_TRUE, REDIRECT_FALSE, SET_MESSAGE, REMOVE_MESSAGE, SET_POSTS } from "../types/PostTypes"
 
 const initState = {
     loading: false,
     createErrors: [],
     redirect: false,
-    message: ""
+    message: "",
+    posts: []
 }
 
 export const PostReducer = (state = initState, action) => {
@@ -33,3 +34,12 @@ export const PostReducer = (state = initState, action) => {
 
 }
 
+export const FetchPosts = (state = initState, action) => {
+    const { type, payload } = action
+    if (type === SET_POSTS) {
+        return { ...state, posts: payload }
+    } else {
+        return state
+    }
+
+}

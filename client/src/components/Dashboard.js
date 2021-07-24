@@ -5,9 +5,10 @@ import { REDIRECT_FALSE, REMOVE_MESSAGE } from '../store/types/PostTypes'
 import { Toaster, toast } from "react-hot-toast"
 import { fetchPosts } from '../store/asyncMethods/PostMethods'
 const Dashboard = () => {
-    const { redirect, message } = useSelector(state => state.PostReducer)
+    const { redirect, message, loading } = useSelector(state => state.PostReducer)
     const { user: { _id: id } } = useSelector(state => state.AuthReducer)
-
+    const { posts } = useSelector(state => state.FetchPosts)
+    console.log(posts)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchPosts(id))
