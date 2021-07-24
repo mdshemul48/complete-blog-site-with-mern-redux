@@ -5,6 +5,8 @@ import { REDIRECT_FALSE, REMOVE_MESSAGE } from '../store/types/PostTypes'
 import { Toaster, toast } from "react-hot-toast"
 import { fetchPosts } from '../store/asyncMethods/PostMethods'
 import { Link } from 'react-router-dom'
+import { BsPencil, BsArchive } from "react-icons/bs"
+
 const Dashboard = () => {
     const { redirect, message, loading } = useSelector(state => state.PostReducer)
     const { user: { _id: id } } = useSelector(state => state.AuthReducer)
@@ -49,6 +51,11 @@ const Dashboard = () => {
                                     <div className="dashboard__posts__title">
                                         <Link to="/">{post.title}</Link>
                                     </div>
+                                    <div className="dashboard__posts__links">
+                                        <Link to="/"><BsPencil className="icon" /></Link>
+                                        <BsArchive className="icon" />
+                                    </div>
+
                                 </div>
                             }
                         ) : "you dont have any post" : "loading"}
