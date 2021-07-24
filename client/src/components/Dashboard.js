@@ -3,11 +3,20 @@ import { Helmet } from "react-helmet"
 import { useSelector, useDispatch } from "react-redux"
 import { REDIRECT_FALSE, REMOVE_MESSAGE } from '../store/types/PostTypes'
 import { Toaster, toast } from "react-hot-toast"
+import { fetchPosts } from '../store/asyncMethods/PostMethods'
+import { Link } from 'react-router-dom'
+import { BsPencil, BsArchive } from "react-icons/bs"
 
+import Loader from './Loader'
+import Sidebar from './sidebar'
 const Dashboard = () => {
-    const { redirect, message } = useSelector(state => state.PostReducer)
+    const { redirect, message, loading } = useSelector(state => state.PostReducer)
+    const { user: { _id: id } } = useSelector(state => state.AuthReducer)
+    const { posts } = useSelector(state => state.FetchPosts)
+    console.log(posts)
     const dispatch = useDispatch()
     useEffect(() => {
+        dispatch(fetchPosts(id))
         if (redirect) {
             dispatch({ type: REDIRECT_FALSE })
         }
@@ -16,7 +25,7 @@ const Dashboard = () => {
             dispatch({ type: REMOVE_MESSAGE })
         }
 
-    }, [dispatch, redirect, message])
+    }, [dispatch, redirect, message, id])
     return (
         <>
             <Helmet>
@@ -32,7 +41,30 @@ const Dashboard = () => {
 
                     }
                 }} />
-            <h1>Dashboard</h1>
+            <div className="container mt-100">
+                <div className="row ml-minus-15 mr-minus-15">
+                    <div className="col-3 p-15">
+                        <Sidebar />
+                    </div>
+                    <div className="col-9 p-15">
+                        {!loading ? posts.length > 0 ? posts.map(
+                            (post) => {
+                                return <div className="dashboard__posts" key={post._id}>
+                                    <div className="dashboard__posts__title">
+                                        <Link to="/">{post.title}</Link>
+                                    </div>
+                                    <div className="dashboard__posts__links">
+                                        <Link to="/"><BsPencil className="icon" /></Link>
+                                        <BsArchive className="icon" />
+                                    </div>
+
+                                </div>
+                            }
+                        ) : "you dont have any post" : <Loader />}
+                    </div>
+                </div>
+            </div>
+
         </>
     )
 }

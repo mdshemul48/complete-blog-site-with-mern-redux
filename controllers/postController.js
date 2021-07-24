@@ -78,3 +78,14 @@ export const createPost = (req, res) => {
         }
     })
 }
+
+
+export const fetchPosts = async (req, res) => {
+    const id = req.params.id
+    try {
+        const response = await PostModel.find({ userId: id })
+        return res.status(200).json({ response })
+    } catch (error) {
+        return res.status(500).json({ errors: err, msg: err.message })
+    }
+}
