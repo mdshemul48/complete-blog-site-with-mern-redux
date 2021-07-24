@@ -13,7 +13,6 @@ export const createAction = (postData) => {
                     "Authorization": `Bearer ${token}`
                 }
             }
-            console.log(config)
             const { data: { msg } } = await axios.post("/create_post", postData, config)
             dispatch({ type: CLOSE_LOADER })
             dispatch({ type: REMOVE_ERRORS })
@@ -25,6 +24,26 @@ export const createAction = (postData) => {
             dispatch({ type: CREATE_ERRORS, payload: errors })
 
 
+        }
+    }
+}
+
+export const fetchPosts = (id) => {
+    return async (dispatch, getState) => {
+        const { AuthReducer: { token } } = getState()
+        try {
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+            dispatch({ type: SET_LOADER })
+            const { data: { response } } = await axios.get(`/posts/${id}`, config)
+            dispatch({ type: CLOSE_LOADER })
+            console.log(response)
+        } catch (error) {
+            console.log(error.response);
+            dispatch({ type: CLOSE_LOADER })
         }
     }
 }

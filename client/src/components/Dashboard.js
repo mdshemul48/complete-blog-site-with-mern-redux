@@ -3,11 +3,14 @@ import { Helmet } from "react-helmet"
 import { useSelector, useDispatch } from "react-redux"
 import { REDIRECT_FALSE, REMOVE_MESSAGE } from '../store/types/PostTypes'
 import { Toaster, toast } from "react-hot-toast"
-
+import { fetchPosts } from '../store/asyncMethods/PostMethods'
 const Dashboard = () => {
     const { redirect, message } = useSelector(state => state.PostReducer)
+    const { user: { _id: id } } = useSelector(state => state.AuthReducer)
+
     const dispatch = useDispatch()
     useEffect(() => {
+        dispatch(fetchPosts(id))
         if (redirect) {
             dispatch({ type: REDIRECT_FALSE })
         }
@@ -16,7 +19,7 @@ const Dashboard = () => {
             dispatch({ type: REMOVE_MESSAGE })
         }
 
-    }, [dispatch, redirect, message])
+    }, [dispatch, redirect, message, id])
     return (
         <>
             <Helmet>
