@@ -34,7 +34,7 @@ const Dashboard = () => {
         <>
             <Helmet>
                 <title>Dashboard</title>
-                <meta name="description" content="Dashboard" />
+                <meta  name="description" content="Dashboard" />
             </Helmet>
             <Toaster position="top-right"
                 reverseOrder={false}
