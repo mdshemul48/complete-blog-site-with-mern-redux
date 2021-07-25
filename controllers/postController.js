@@ -81,11 +81,22 @@ export const createPost = (req, res) => {
 
 
 export const fetchPosts = async (req, res) => {
-    const id = req.params.id
+    // getting page for fetching page data
+    const { id, page } = req.params
+    // this will decide total post par page.
+    const parPage = 5;
+    // this will decrease post for skip
+    const skip = (page - 1) * parPage
+
     try {
-        const response = await PostModel.find({ userId: id })
-        return res.status(200).json({ response })
-    } catch (error) {
+        // counting user all post
+        const count = await PostModel.find({ userId: id }).countDocuments()
+        // getting 5post for 1page and sorting with latest updated.
+        const response = await PostModel.find({ userId: id }).skip(skip).limit(parPage).sort({ updatedAt: -1 })
+        // sending post and count, par page for pagination section
+        return res.status(200).json({ response, count, parPage })
+    } catch (err) {
+        console.log(err)
         return res.status(500).json({ errors: err, msg: err.message })
     }
 }

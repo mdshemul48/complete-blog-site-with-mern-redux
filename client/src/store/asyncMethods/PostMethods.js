@@ -28,7 +28,7 @@ export const createAction = (postData) => {
     }
 }
 
-export const fetchPosts = (id) => {
+export const fetchPosts = (id, page) => {
     return async (dispatch, getState) => {
         const { AuthReducer: { token } } = getState()
         try {
@@ -38,9 +38,9 @@ export const fetchPosts = (id) => {
                 }
             }
             dispatch({ type: SET_LOADER })
-            const { data: { response } } = await axios.get(`/posts/${id}`, config)
+            const { data: { response, count, parPage } } = await axios.get(`/posts/${id}/${page}`, config)
             dispatch({ type: CLOSE_LOADER })
-            dispatch({ type: SET_POSTS, payload: response })
+            dispatch({ type: SET_POSTS, payload: { response, count, parPage } })
 
         } catch (error) {
             console.log(error.response);

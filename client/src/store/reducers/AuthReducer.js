@@ -13,6 +13,7 @@ const verifyToken = (token) => {
     const expiresIn = new Date(decodedInfo.exp * 1000)
     if (new Date() > expiresIn) {
         localStorage.removeItem('myToken')
+        return null
     }
     else {
         return decodedInfo
@@ -22,9 +23,12 @@ const verifyToken = (token) => {
 const token = localStorage.getItem('myToken')
 if (token) {
     const decodedInfo = verifyToken(token)
-    initState.token = token
-    const { user } = decodedInfo
-    initState.user = user
+    if (decodedInfo) {
+        initState.token = token
+        const { user } = decodedInfo
+        initState.user = user
+    }
+
 }
 
 

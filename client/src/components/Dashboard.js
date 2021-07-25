@@ -4,19 +4,23 @@ import { useSelector, useDispatch } from "react-redux"
 import { REDIRECT_FALSE, REMOVE_MESSAGE } from '../store/types/PostTypes'
 import { Toaster, toast } from "react-hot-toast"
 import { fetchPosts } from '../store/asyncMethods/PostMethods'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { BsPencil, BsArchive } from "react-icons/bs"
 
+import Pagination from './Pagination'
 import Loader from './Loader'
 import Sidebar from './sidebar'
 const Dashboard = () => {
     const { redirect, message, loading } = useSelector(state => state.PostReducer)
     const { user: { _id: id } } = useSelector(state => state.AuthReducer)
-    const { posts } = useSelector(state => state.FetchPosts)
-    console.log(posts)
+    const { posts, count, parPage } = useSelector(state => state.FetchPosts)
+    let { page } = useParams()
+    if (page === undefined) {
+        page = 1
+    }
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(fetchPosts(id))
+        dispatch(fetchPosts(id, page))
         if (redirect) {
             dispatch({ type: REDIRECT_FALSE })
         }
@@ -25,12 +29,12 @@ const Dashboard = () => {
             dispatch({ type: REMOVE_MESSAGE })
         }
 
-    }, [dispatch, redirect, message, id])
+    }, [dispatch, redirect, message, id, page])
     return (
         <>
             <Helmet>
                 <title>Dashboard</title>
-                <meta name="description" content="Dashboard" />
+                <meta  name="description" content="Dashboard" />
             </Helmet>
             <Toaster position="top-right"
                 reverseOrder={false}
@@ -61,6 +65,7 @@ const Dashboard = () => {
                                 </div>
                             }
                         ) : "you dont have any post" : <Loader />}
+                        <Pagination count={count} parPage={parPage} page={page} />
                     </div>
                 </div>
             </div>
