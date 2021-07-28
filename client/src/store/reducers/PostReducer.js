@@ -1,4 +1,15 @@
-import { SET_LOADER, CLOSE_LOADER, CREATE_ERRORS, REMOVE_ERRORS, REDIRECT_TRUE, REDIRECT_FALSE, SET_MESSAGE, REMOVE_MESSAGE, SET_POSTS } from "../types/PostTypes"
+import {
+    SET_LOADER,
+    CLOSE_LOADER,
+    CREATE_ERRORS,
+    REMOVE_ERRORS,
+    REDIRECT_TRUE,
+    REDIRECT_FALSE,
+    SET_MESSAGE,
+    REMOVE_MESSAGE,
+    SET_POSTS,
+    SET_POST
+} from "../types/PostTypes"
 
 const initState = {
     loading: false,
@@ -7,7 +18,8 @@ const initState = {
     message: "",
     posts: [],
     parPage: 0,
-    count: 0
+    count: 0,
+    post: {}
 
 }
 
@@ -41,6 +53,15 @@ export const FetchPosts = (state = initState, action) => {
     const { type, payload } = action
     if (type === SET_POSTS) {
         return { ...state, posts: payload.response, count: payload.count, parPage: payload.parPage }
+    } else {
+        return state
+    }
+
+}
+export const FetchPost = (state = initState, action) => {
+    const { type, payload } = action;
+    if (type === SET_POST) {
+        return { ...state, post: payload }
     } else {
         return state
     }

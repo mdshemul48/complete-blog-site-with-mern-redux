@@ -1,13 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Helmet from "react-helmet";
 import { useParams } from 'react-router';
 import ReactQuill from 'react-quill';
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchPost } from '../store/asyncMethods/PostMethods';
+
+
+import "react-quill/dist/quill.snow.css"
 const Edit = () => {
     const { id } = useParams()
     const [postDetail, setPostDetail] = useState({ title: "", description: "" })
     const [postBody, setPostBody] = useState("")
-    console.log(postDetail)
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(fetchPost(id))
+    }, [dispatch, id])
 
     return (
         <>
