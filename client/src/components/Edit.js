@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import ReactQuill from 'react-quill';
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPost } from '../store/asyncMethods/PostMethods';
-
+import { POST_RESET } from '../store/types/PostTypes';
 
 import "react-quill/dist/quill.snow.css"
 const Edit = () => {
@@ -13,6 +13,19 @@ const Edit = () => {
     const [postBody, setPostBody] = useState("")
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.PostReducer)
+    const { post, postStatus } = useSelector(state => state.FetchPost)
+
+    useEffect(() => {
+        if (postStatus) {
+            setPostDetail({
+                title: post.title,
+                description: post.description
+            })
+            setPostBody(post.body)
+            dispatch({ type: POST_RESET })
+        }
+    }, [dispatch, id, post.title, post.description, postStatus, post.body, post])
+
     useEffect(() => {
         dispatch(fetchPost(id))
     }, [dispatch, id])

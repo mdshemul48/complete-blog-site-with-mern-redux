@@ -67,6 +67,8 @@ export const FetchPost = (state = initState, action) => {
         return { ...state, post: payload }
     } else if (type === POST_REQUEST) {
         return { ...state, postStatus: true }
+    } else if (type === POST_RESET) {
+        return { ...state, postStatus: false }
     } else {
         return state
     }
