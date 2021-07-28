@@ -13,7 +13,7 @@ import PrivateRoute from "./private/PrivateRoute"
 import RouteLinks from "./private/RouteLinks";
 import NotFound from "./components/auth/NotFound";
 import Create from "./components/Create";
-
+import Edit from "./components/Edit"
 function App() {
   return (
     <Provider store={Store}>
@@ -25,6 +25,7 @@ function App() {
           <RouteLinks path="/login" exact component={Login} />
           <PrivateRoute path="/dashboard/:page?" exact component={Dashboard} />
           <PrivateRoute path="/create" exact component={Create} />
+          <PrivateRoute path="/edit/:id" exact component={Edit} />
           <Route component={NotFound} />
         </Switch>
       </Router>

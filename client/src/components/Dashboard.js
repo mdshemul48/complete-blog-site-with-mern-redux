@@ -34,7 +34,7 @@ const Dashboard = () => {
         <>
             <Helmet>
                 <title>Dashboard</title>
-                <meta  name="description" content="Dashboard" />
+                <meta name="description" content="Dashboard" />
             </Helmet>
             <Toaster position="top-right"
                 reverseOrder={false}
@@ -58,7 +58,7 @@ const Dashboard = () => {
                                         <Link to="/">{post.title}</Link>
                                     </div>
                                     <div className="dashboard__posts__links">
-                                        <Link to="/"><BsPencil className="icon" /></Link>
+                                        <Link to={`/edit/${post._id}`}><BsPencil className="icon" /></Link>
                                         <BsArchive className="icon" />
                                     </div>
 
