@@ -12,7 +12,7 @@ const Edit = () => {
     const [postDetail, setPostDetail] = useState({ title: "", description: "" })
     const [postBody, setPostBody] = useState("")
     const dispatch = useDispatch()
-
+    const { loading } = useSelector(state => state.PostReducer)
     useEffect(() => {
         dispatch(fetchPost(id))
     }, [dispatch, id])

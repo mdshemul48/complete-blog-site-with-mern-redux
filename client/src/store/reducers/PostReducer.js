@@ -8,7 +8,9 @@ import {
     SET_MESSAGE,
     REMOVE_MESSAGE,
     SET_POSTS,
-    SET_POST
+    SET_POST,
+    POST_REQUEST,
+    POST_RESET
 } from "../types/PostTypes"
 
 const initState = {
@@ -19,7 +21,8 @@ const initState = {
     posts: [],
     parPage: 0,
     count: 0,
-    post: {}
+    post: {},
+    postStatus: false
 
 }
 
@@ -62,8 +65,11 @@ export const FetchPost = (state = initState, action) => {
     const { type, payload } = action;
     if (type === SET_POST) {
         return { ...state, post: payload }
+    } else if (type === POST_REQUEST) {
+        return { ...state, postStatus: true }
     } else {
         return state
     }
+
 
 }
