@@ -100,3 +100,17 @@ export const fetchPosts = async (req, res) => {
         return res.status(500).json({ errors: err, msg: err.message })
     }
 }
+
+
+export const fetchPost = async (req, res) => {
+    const id = req.params.id
+    try {
+        const post = await PostModel.findOne({ _id: id })
+        if (post) {
+            return res.status(200).json({ post })
+        }
+
+    } catch (error) {
+        return res.status(500).json({ errors: error, msg: error.message })
+    }
+}
