@@ -38,11 +38,11 @@ const Pagination = ({ count, page, parPage }) => {
             return (<li><Link to={`/dashboard/${+page - 1}`}><BsChevronDoubleLeft /></Link></li>)
         }
     }
-    return (
+    return totalPages ? (
         <div className="pagination">
             {prev()}{links()}{next()}
         </div>
-    )
+    ) : ""
 }
 
 export default Pagination
