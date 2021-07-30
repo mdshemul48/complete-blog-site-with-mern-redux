@@ -13,6 +13,7 @@
     padding: 1.5rem;
     border: 1px solid $silverLight;
     border-top: none;
+    cursor: pointer;
     h3 {
       font-size: 1.8rem;
       font-weight: 400;
@@ -20,6 +21,13 @@
     a {
       color: $black;
       font-size: 1.4rem;
+    }
+    &:hover {
+      background: $green;
+    }
+    &:hover a,
+    &:hover h3 {
+      color: white;
     }
   }
 }

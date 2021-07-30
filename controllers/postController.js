@@ -3,6 +3,9 @@ import { v4 as uuid } from 'uuid'
 import fs from 'fs'
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { body, validationResult } from "express-validator"
+import { htmlToText } from "html-to-text";
+
 
 import PostModel from "../models/PostModel.js"
 
@@ -99,4 +102,36 @@ export const fetchPosts = async (req, res) => {
         console.log(err)
         return res.status(500).json({ errors: err, msg: err.message })
     }
+}
+
+
+export const fetchPost = async (req, res) => {
+    const id = req.params.id
+    try {
+        const post = await PostModel.findOne({ _id: id })
+        if (post) {
+            return res.status(200).json({ post })
+        }
+
+    } catch (error) {
+        return res.status(500).json({ errors: error, msg: error.message })
+    }
+}
+
+export const updateValidations = [
+    body("title").notEmpty().trim().withMessage("Title is required"),
+    body("body").notEmpty().trim().custom(value => {
+        let PostBody = value.replace(/\n/, "")
+        if (htmlToText(PostBody).trim().length === 0) {
+            return false
+        } else {
+            return true
+        }
+    }).withMessage("Body is required"),
+    body("description").notEmpty().trim().withMessage("Description is required")
+]
+
+
+export const updatePost = (req, res) => {
+
 }

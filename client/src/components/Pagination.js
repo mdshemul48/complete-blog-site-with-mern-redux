@@ -22,7 +22,7 @@ const Pagination = ({ count, page, parPage }) => {
         const store = []
         // looping from start loop and ending to endLoop. 
         for (let i = startLoop; i <= endLoop; i++) {
-            store.push(<li key={i}><Link to={`/dashboard/${i}`}>{i}</Link></li>)
+            store.push(<li key={i} className={i === +page ? "active" : ""}><Link to={`/dashboard/${i}`}>{i}</Link></li>)
         }
         return store
     }
@@ -38,11 +38,11 @@ const Pagination = ({ count, page, parPage }) => {
             return (<li><Link to={`/dashboard/${+page - 1}`}><BsChevronDoubleLeft /></Link></li>)
         }
     }
-    return (
+    return totalPages ? (
         <div className="pagination">
             {prev()}{links()}{next()}
         </div>
-    )
+    ) : ""
 }
 
 export default Pagination
