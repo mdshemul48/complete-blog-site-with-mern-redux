@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { useParams } from 'react-router';
 import ReactQuill from 'react-quill';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPost } from '../store/asyncMethods/PostMethods';
+import { fetchPost, updateAction } from '../store/asyncMethods/PostMethods';
 import { POST_RESET } from '../store/types/PostTypes';
 
 import "react-quill/dist/quill.snow.css"
@@ -30,6 +30,18 @@ const Edit = () => {
         dispatch(fetchPost(id))
     }, [dispatch, id])
 
+    const updatedPost = (event) => {
+        event.preventDefault()
+
+        dispatch(updateAction({
+            title: postDetail.title,
+            body: postBody,
+            description: postDetail.description
+        }))
+    }
+
+
+
     return (
         <>
             <Helmet>
@@ -42,7 +54,7 @@ const Edit = () => {
                         <div className="col-6">
                             <div className="card">
                                 <h3 className="card__h3">Create a new post</h3>
-                                <form action="title">
+                                <form action="title" onSubmit={updatedPost}>
                                     <label htmlFor="title"></label>
                                     <input type="text"
                                         name="title" id="title"
@@ -61,7 +73,11 @@ const Edit = () => {
                                             name="description"
                                             cols="30" rows="10"
                                             defaultValue={postDetail.description}
-                                            onChange={(event) => setPostDetail({ ...postDetail, description: event.target.value })} className="group__control" placeholder="meta description..." maxLength="150"></textarea>
+                                            onChange={(event) => setPostDetail({ ...postDetail, description: event.target.value })}
+                                            onKeyUp={(event) => setPostDetail({ ...postDetail, description: event.target.value })}
+                                            className="group__control"
+                                            placeholder="meta description..."
+                                            maxLength="150"></textarea>
                                         <p
                                             className="length">{
                                                 postDetail.description ?

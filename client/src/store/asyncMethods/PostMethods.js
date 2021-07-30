@@ -74,3 +74,27 @@ export const fetchPost = (id) => {
 
     }
 }
+
+
+export const updateAction = (editData) => {
+    return async (dispatch, getState) => {
+        const { AuthReducer: { token } } = getState()
+
+        dispatch({ type: SET_LOADER })
+        try {
+
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+
+            const { data } = await axios.post("/update", editData, config)
+            dispatch({ type: CLOSE_LOADER })
+
+
+        } catch (err) {
+            dispatch({ type: CLOSE_LOADER })
+        }
+    }
+}
