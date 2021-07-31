@@ -1,19 +1,18 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux"
-
+import { Provider } from "react-redux";
 
 import "./main.scss";
 import Home from "./components/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import NavBar from "./components/NavBar";
-import Dashboard from "./components/Dashboard"
+import Dashboard from "./components/Dashboard";
 import Store from "./store";
-import PrivateRoute from "./private/PrivateRoute"
+import PrivateRoute from "./private/PrivateRoute";
 import RouteLinks from "./private/RouteLinks";
 import NotFound from "./components/auth/NotFound";
 import Create from "./components/Create";
-import Edit from "./components/Edit"
+import Edit from "./components/Edit";
 function App() {
   return (
     <Provider store={Store}>

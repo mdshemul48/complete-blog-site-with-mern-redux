@@ -1,12 +1,20 @@
-import React from 'react'
+import React from "react";
 
-import { useSelector } from 'react-redux'
-import { Route, Redirect } from "react-router-dom"
+import { useSelector } from "react-redux";
+import { Route, Redirect } from "react-router-dom";
 
 const RouteLinks = (props) => {
-    const { user } = useSelector(state => state.AuthReducer)
+  const { user } = useSelector((state) => state.AuthReducer);
 
-    return user ? <Redirect to="/dashboard" /> : <Route path={props.AuthReducer} exact={props.exact} component={props.component} />
-}
+  return user ? (
+    <Redirect to="/dashboard" />
+  ) : (
+    <Route
+      path={props.AuthReducer}
+      exact={props.exact}
+      component={props.component}
+    />
+  );
+};
 
-export default RouteLinks
+export default RouteLinks;

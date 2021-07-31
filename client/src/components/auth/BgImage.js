@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const BgImage = () => {
-    return (
-        <div className="bgImage"></div>
-    )
-}
+  return <div className="bgImage"></div>;
+};
 
-export default BgImage
+export default BgImage;
