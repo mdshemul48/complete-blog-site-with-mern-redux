@@ -10,6 +10,7 @@ import {
   SET_POSTS,
   SET_POST,
   POST_REQUEST,
+  SET_UPDATE_ERRORS,
 } from "../types/PostTypes";
 
 export const createAction = (postData) => {
@@ -105,9 +106,16 @@ export const updateAction = (editData) => {
         },
       };
 
-      const { data } = await axios.post("/update", editData, config);
+      const { data } = await axios.put("/update", editData, config);
       dispatch({ type: CLOSE_LOADER });
     } catch (err) {
+      const {
+        response: {
+          data: { errors },
+        },
+      } = err;
+
+      dispatch({ type: SET_UPDATE_ERRORS, payload: errors });
       dispatch({ type: CLOSE_LOADER });
     }
   };
