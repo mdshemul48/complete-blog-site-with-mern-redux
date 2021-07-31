@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Helmet from "react-helmet";
 import { useParams } from "react-router";
 import ReactQuill from "react-quill";
+import { Toaster, toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPost, updateAction } from "../store/asyncMethods/PostMethods";
 import { POST_RESET } from "../store/types/PostTypes";
@@ -14,6 +15,7 @@ const Edit = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.PostReducer);
   const { post, postStatus } = useSelector((state) => state.FetchPost);
+  const { editErrors } = useSelector((state) => state.updatePost);
 
   useEffect(() => {
     if (postStatus) {
@@ -42,12 +44,28 @@ const Edit = () => {
     );
   };
 
+  useEffect(() => {
+    if (editErrors.length !== 0) {
+      editErrors.map((err) => toast.error(err.msg));
+    }
+  }, [editErrors]);
+
   return (
     <>
       <Helmet>
         <title>Edit post</title>
         <meta name="description" content="update post" />
       </Helmet>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <div className="mt-100">
         <div className="container">
           <div className="row">
