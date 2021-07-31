@@ -11,3 +11,4 @@ export const SET_POST = "SET_POST";
 export const POST_REQUEST = "POST_REQUEST";
 export const POST_RESET = "POST_RESET";
 export const SET_UPDATE_ERRORS = "SET_UPDATE_ERRORS";
+export const RESET_UPDATE_ERRORS = "RESET_UPDATE_ERRORS";
