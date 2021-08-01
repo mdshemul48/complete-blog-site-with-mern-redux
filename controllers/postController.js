@@ -1,4 +1,3 @@
-import formidable from "formidable";
 import { v4 as uuid } from "uuid";
 import fs from "fs";
 import { dirname } from "path";
@@ -68,12 +67,10 @@ export const createPost = (req, res) => {
                 userName: name,
                 userId: id,
               });
-              return res
-                .status(200)
-                .json({
-                  msg: "your post have been created successfully.",
-                  response,
-                });
+              return res.status(200).json({
+                msg: "your post have been created successfully.",
+                response,
+              });
             } catch (error) {
               return res
                 .status(500)
@@ -142,4 +139,20 @@ export const updateValidations = [
   body("description").notEmpty().trim().withMessage("Description is required"),
 ];
 
-export const updatePost = (req, res) => {};
+export const updatePost = async (req, res) => {
+  const { title, description, body, id } = req.body;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  try {
+    await PostModel.findByIdAndUpdate(id, {
+      title,
+      description,
+      body,
+    });
+    return res.status(200).json({ msg: "your post has been updated" });
+  } catch (error) {
+    return res.status(500).json({ errors: error, msg: error.message });
+  }
+};
