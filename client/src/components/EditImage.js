@@ -10,16 +10,14 @@ const EditImage = () => {
   });
 
   const imageHandle = (event) => {
-    setState((prevState) => {
-      return {
-        ...prevState,
-        image: event.target.files[0],
-        imageName: event.target.files[0].name,
-      };
-    });
     const reader = new FileReader();
     reader.onloadend = () => {
-      setState((prevState) => ({ ...prevState, imagePreview: reader.result }));
+      setState((prevState) => ({
+        ...prevState,
+        imagePreview: reader.result,
+        image: event.target.files[0],
+        imageName: event.target.files[0].name,
+      }));
     };
     reader.readAsDataURL(event.target.files[0]);
   };
