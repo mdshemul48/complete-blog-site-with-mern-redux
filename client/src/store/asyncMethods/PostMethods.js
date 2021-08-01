@@ -108,6 +108,7 @@ export const updateAction = (editData) => {
 
       const { data } = await axios.put("/update", editData, config);
       dispatch({ type: CLOSE_LOADER });
+      dispatch({ type: REDIRECT_TRUE, payload: data.msg });
     } catch (err) {
       const {
         response: {
