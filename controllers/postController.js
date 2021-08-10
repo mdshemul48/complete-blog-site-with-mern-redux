@@ -170,6 +170,9 @@ export const updateImage = (req, res) => {
       const split = type.split("/");
       const extension = split[1].toLowerCase();
       if (extension !== "jpg" && extension !== "jpeg" && extension !== "png") {
+        imageErrors.push({ msg: `${extension} invalid file extension.` });
+      } else {
+        files.image.name = uuid() + "." + extension;
       }
     }
   });
