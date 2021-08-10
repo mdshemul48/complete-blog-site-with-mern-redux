@@ -6,7 +6,7 @@ import { body, validationResult } from "express-validator";
 import { htmlToText } from "html-to-text";
 
 import PostModel from "../models/PostModel.js";
-import { formidable } from "formidable";
+import formidable from "formidable";
 
 export const createPost = (req, res) => {
   const form = formidable({ multiples: true });
@@ -160,4 +160,8 @@ export const updatePost = async (req, res) => {
 
 export const updateImage = (req, res) => {
   const form = formidable({ multiples: true });
+
+  form.parse(req, (errors, fields, files) => {
+    console.log(files);
+  });
 };
