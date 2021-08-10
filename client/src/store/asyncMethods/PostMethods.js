@@ -4,7 +4,6 @@ import {
   REMOVE_ERRORS,
   SET_LOADER,
   CLOSE_LOADER,
-  REDIRECT_FALSE,
   REDIRECT_TRUE,
   SET_MESSAGE,
   SET_POSTS,
@@ -148,8 +147,7 @@ export const updateImageAction = (updateData) => {
         },
       } = error;
       dispatch({ type: CLOSE_LOADER });
-      dispatch({ type: UPDATE_IMAGE_ERROR });
-      console.log(error.response);
+      dispatch({ type: UPDATE_IMAGE_ERROR, payload: errors });
     }
   };
 };

@@ -182,10 +182,10 @@ export const updateImage = (req, res) => {
       const __dirname = dirname(fileURLToPath(import.meta.url));
       const newPath =
         __dirname + `/../client/public/images/poster/${files.image.name}`;
-      fs.copy(files.image.path, newPath, async (error) => {
+      fs.copyFile(files.image.path, newPath, async (error) => {
         if (!error) {
           try {
-            const response = await Post.findByIdAndUpdate(id, {
+            const response = await PostModel.findByIdAndUpdate(id, {
               image: files.image.name,
             });
             return res.status(200).json({ msg: "Your image has been updated" });

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { updateImageAction } from "../store/asyncMethods/PostMethods";
@@ -8,8 +8,9 @@ import { RESET_UPDATE_IMAGE_ERRORS } from "../store/types/PostTypes";
 const EditImage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { push } = useHistory();
   const { updateImageErrors } = useSelector((state) => state.updateImage);
-  console.log(updateImageErrors);
+  const { redirect } = useSelector((state) => state.PostReducer);
   const [state, setState] = useState({
     image: "",
     imagePreview: "",
@@ -45,6 +46,12 @@ const EditImage = () => {
       dispatch({ type: RESET_UPDATE_IMAGE_ERRORS });
     }
   }, [updateImageErrors, dispatch]);
+
+  useEffect(() => {
+    if (redirect) {
+      push("/dashboard");
+    }
+  }, [redirect, push]);
   return (
     <>
       <Helmet>
