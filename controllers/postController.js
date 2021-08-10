@@ -175,5 +175,16 @@ export const updateImage = (req, res) => {
         files.image.name = uuid() + "." + extension;
       }
     }
+    if (imageErrors.length !== 0) {
+      return res.status(400).json({ errors: imageErrors });
+    } else {
+      const __dirname = dirname(fileURLToPath(import.meta.url));
+      const newPath =
+        __dirname + `/../client/public/images/poster/${files.image.name}`;
+      fs.copy(files.image.path, newPath, async (error) => {
+        if (!error) {
+        }
+      });
+    }
   });
 };
