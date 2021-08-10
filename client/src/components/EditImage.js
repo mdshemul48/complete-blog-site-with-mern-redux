@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Helmet from "react-helmet";
 import { useParams } from "react-router";
+import toast, { Toaster } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { updateImageAction } from "../store/asyncMethods/PostMethods";
 const EditImage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { updateImageErrors } = useSelector((state) => state.updateImage);
-
+  console.log(updateImageErrors);
   const [state, setState] = useState({
     image: "",
     imagePreview: "",
@@ -36,12 +37,30 @@ const EditImage = () => {
 
     dispatch(updateImageAction(formData));
   };
+
+  useEffect(() => {
+    if (updateImageErrors.length !== 0) {
+      updateImageErrors.map((error) => toast.error(error.msg));
+    }
+  }, [updateImageErrors]);
   return (
     <>
       <Helmet>
         <title>Update Image</title>
         <meta name='description' content='Image Update' />
       </Helmet>
+
+      <Toaster
+        position='top-right'
+        reverseOrder={false}
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
+
       <div className='container mt-100'>
         <div className='row'>
           <div className='col-6'>

@@ -27,7 +27,7 @@ const initState = {
   post: {},
   postStatus: false,
   editErrors: [],
-  updateImageError: [],
+  updateImageErrors: [],
 };
 
 export const PostReducer = (state = initState, action) => {
@@ -93,7 +93,7 @@ export const updatePost = (state = initState, action) => {
 export const updateImage = (state = initState, action) => {
   const { payload, type } = action;
   if (type === UPDATE_IMAGE_ERROR) {
-    return { ...state, updateImageError: payload };
+    return { ...state, updateImageErrors: payload };
   } else {
     return state;
   }
