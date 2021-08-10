@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { updateImageAction } from "../store/asyncMethods/PostMethods";
+import { RESET_UPDATE_IMAGE_ERRORS } from "../store/types/PostTypes";
 const EditImage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -41,8 +42,9 @@ const EditImage = () => {
   useEffect(() => {
     if (updateImageErrors.length !== 0) {
       updateImageErrors.map((error) => toast.error(error.msg));
+      dispatch({ type: RESET_UPDATE_IMAGE_ERRORS });
     }
-  }, [updateImageErrors]);
+  }, [updateImageErrors, dispatch]);
   return (
     <>
       <Helmet>

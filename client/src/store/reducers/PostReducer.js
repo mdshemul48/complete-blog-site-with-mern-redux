@@ -14,6 +14,7 @@ import {
   SET_UPDATE_ERRORS,
   RESET_UPDATE_ERRORS,
   UPDATE_IMAGE_ERROR,
+  RESET_UPDATE_IMAGE_ERRORS,
 } from "../types/PostTypes";
 
 const initState = {
@@ -94,6 +95,8 @@ export const updateImage = (state = initState, action) => {
   const { payload, type } = action;
   if (type === UPDATE_IMAGE_ERROR) {
     return { ...state, updateImageErrors: payload };
+  } else if (type === RESET_UPDATE_IMAGE_ERRORS) {
+    return { ...state, updateImageErrors: [] };
   } else {
     return state;
   }
