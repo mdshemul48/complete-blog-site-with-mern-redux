@@ -168,7 +168,9 @@ export const updateImage = (req, res) => {
     } else {
       const { type } = files.image;
       const split = type.split("/");
-      console.log(split);
+      const extension = split[1].toLowerCase();
+      if (extension !== "jpg" && extension !== "jpeg" && extension !== "png") {
+      }
     }
   });
 };
