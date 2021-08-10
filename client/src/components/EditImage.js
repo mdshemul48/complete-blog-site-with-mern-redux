@@ -6,6 +6,8 @@ import { updateImageAction } from "../store/asyncMethods/PostMethods";
 const EditImage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { updateImageErrors } = useSelector((state) => state.updateImage);
+
   const [state, setState] = useState({
     image: "",
     imagePreview: "",
@@ -38,37 +40,37 @@ const EditImage = () => {
     <>
       <Helmet>
         <title>Update Image</title>
-        <meta name="description" content="Image Update" />
+        <meta name='description' content='Image Update' />
       </Helmet>
-      <div className="container mt-100">
-        <div className="row">
-          <div className="col-6">
-            <div className="card">
-              <h3 className="card__h3">Update Post Image</h3>
+      <div className='container mt-100'>
+        <div className='row'>
+          <div className='col-6'>
+            <div className='card'>
+              <h3 className='card__h3'>Update Post Image</h3>
               <form onSubmit={updateImage}>
-                <div className="group">
-                  <label htmlFor="image" className="image__label">
+                <div className='group'>
+                  <label htmlFor='image' className='image__label'>
                     {state.imageName}
                   </label>
                   <input
-                    type="file"
-                    name="image"
-                    id="image"
+                    type='file'
+                    name='image'
+                    id='image'
                     onChange={imageHandle}
                   />
                 </div>
-                <div className="group">
+                <div className='group'>
                   {state.imagePreview ? (
-                    <img src={state.imagePreview} width={"100%"} alt="" />
+                    <img src={state.imagePreview} width={"100%"} alt='' />
                   ) : (
                     ""
                   )}
                 </div>
-                <div className="group">
+                <div className='group'>
                   <input
-                    type="submit"
-                    value="Update image"
-                    className="btn btn-default btn-block"
+                    type='submit'
+                    value='Update image'
+                    className='btn btn-default btn-block'
                   />
                 </div>
               </form>

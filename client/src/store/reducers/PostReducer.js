@@ -13,6 +13,7 @@ import {
   POST_RESET,
   SET_UPDATE_ERRORS,
   RESET_UPDATE_ERRORS,
+  UPDATE_IMAGE_ERROR,
 } from "../types/PostTypes";
 
 const initState = {
@@ -26,6 +27,7 @@ const initState = {
   post: {},
   postStatus: false,
   editErrors: [],
+  updateImageError: [],
 };
 
 export const PostReducer = (state = initState, action) => {
@@ -83,6 +85,15 @@ export const updatePost = (state = initState, action) => {
     return { ...state, editErrors: payload };
   } else if (type === RESET_UPDATE_ERRORS) {
     return { ...state, editErrors: [] };
+  } else {
+    return state;
+  }
+};
+
+export const updateImage = (state = initState, action) => {
+  const { payload, type } = action;
+  if (type === UPDATE_IMAGE_ERROR) {
+    return { ...state, updateImageError: payload };
   } else {
     return state;
   }
