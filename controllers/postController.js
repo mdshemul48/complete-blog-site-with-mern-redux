@@ -6,6 +6,7 @@ import { body, validationResult } from "express-validator";
 import { htmlToText } from "html-to-text";
 
 import PostModel from "../models/PostModel.js";
+import formidable from "formidable";
 
 export const createPost = (req, res) => {
   const form = formidable({ multiples: true });
@@ -155,4 +156,44 @@ export const updatePost = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ errors: error, msg: error.message });
   }
+};
+
+export const updateImage = (req, res) => {
+  const form = formidable({ multiples: true });
+
+  form.parse(req, (errors, fields, files) => {
+    const { id } = fields;
+    const imageErrors = [];
+    if (Object.keys(files).length === 0) {
+      imageErrors.push({ msg: "Please choose image" });
+    } else {
+      const { type } = files.image;
+      const split = type.split("/");
+      const extension = split[1].toLowerCase();
+      if (extension !== "jpg" && extension !== "jpeg" && extension !== "png") {
+        imageErrors.push({ msg: `${extension} invalid file extension.` });
+      } else {
+        files.image.name = uuid() + "." + extension;
+      }
+    }
+    if (imageErrors.length !== 0) {
+      return res.status(400).json({ errors: imageErrors });
+    } else {
+      const __dirname = dirname(fileURLToPath(import.meta.url));
+      const newPath =
+        __dirname + `/../client/public/images/poster/${files.image.name}`;
+      fs.copyFile(files.image.path, newPath, async (error) => {
+        if (!error) {
+          try {
+            const response = await PostModel.findByIdAndUpdate(id, {
+              image: files.image.name,
+            });
+            return res.status(200).json({ msg: "Your image has been updated" });
+          } catch (error) {
+            return res.status(500).json({ errors: error, msg: error.message });
+          }
+        }
+      });
+    }
+  });
 };

@@ -9,6 +9,7 @@ import {
   FetchPosts,
   FetchPost,
   updatePost,
+  updateImage,
 } from "./reducers/PostReducer";
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   FetchPosts,
   FetchPost,
   updatePost,
+  updateImage,
 });
 
 const middlewares = [thunkMiddleware];
