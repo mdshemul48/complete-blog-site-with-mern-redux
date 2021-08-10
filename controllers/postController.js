@@ -162,6 +162,9 @@ export const updateImage = (req, res) => {
   const form = formidable({ multiples: true });
 
   form.parse(req, (errors, fields, files) => {
-    console.log(files);
+    const error = [];
+    if (Object.keys(files).length === 0) {
+      errors.push({ msg: "Please choose image" });
+    }
   });
 };
