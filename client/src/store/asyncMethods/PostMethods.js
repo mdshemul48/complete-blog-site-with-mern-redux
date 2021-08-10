@@ -121,3 +121,23 @@ export const updateAction = (editData) => {
     }
   };
 };
+
+export const updateImageAction = (updateData) => {
+  return async (dispatch, getState) => {
+    const {
+      AuthReducer: { token },
+    } = getState();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    dispatch({ type: SET_LOADER });
+    try {
+      const { data } = await axios.post("/updateImage", updateData, config);
+      dispatch({ type: CLOSE_LOADER });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};
