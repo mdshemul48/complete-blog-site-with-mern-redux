@@ -8,6 +8,7 @@ import {
   updatePost,
   updateValidations,
   updateImage,
+  deletePost,
 } from "../controllers/postController.js";
 // middleware
 import auth from "../middlewares/auth.js";
@@ -19,5 +20,6 @@ router.post("/updateImage", auth, updateImage);
 router.put("/update", [auth, updateValidations], updatePost);
 router.get("/posts/:id/:page", auth, fetchPosts);
 router.get("/post/:id", auth, fetchPost);
+router.delete("/delete/:id", auth, deletePost);
 
 export default router;

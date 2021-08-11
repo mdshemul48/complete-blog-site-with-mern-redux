@@ -197,3 +197,8 @@ export const updateImage = (req, res) => {
     }
   });
 };
+
+export const deletePost = (req, res) => {
+  const id = req.params.id;
+  return res.send("gg");
+};
