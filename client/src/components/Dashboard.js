@@ -37,10 +37,10 @@ const Dashboard = () => {
     <>
       <Helmet>
         <title>Dashboard</title>
-        <meta name="description" content="Dashboard" />
+        <meta name='description' content='Dashboard' />
       </Helmet>
       <Toaster
-        position="top-right"
+        position='top-right'
         reverseOrder={false}
         toastOptions={{
           className: "",
@@ -49,28 +49,31 @@ const Dashboard = () => {
           },
         }}
       />
-      <div className="container mt-100">
-        <div className="row ml-minus-15 mr-minus-15">
-          <div className="col-3 p-15">
+      <div className='container mt-100'>
+        <div className='row ml-minus-15 mr-minus-15'>
+          <div className='col-3 p-15'>
             <Sidebar />
           </div>
-          <div className="col-9 p-15">
+          <div className='col-9 p-15'>
             {!loading ? (
               posts.length > 0 ? (
                 posts.map((post) => {
                   return (
-                    <div className="dashboard__posts" key={post._id}>
-                      <div className="dashboard__posts__title">
-                        <Link to="/">{post.title}</Link>
+                    <div className='dashboard__posts' key={post._id}>
+                      <div className='dashboard__posts__title'>
+                        <Link to='/'>{post.title}</Link>
                       </div>
-                      <div className="dashboard__posts__links">
+                      <div className='dashboard__posts__links'>
                         <Link to={`/updateImage/${post._id}`}>
-                          <BsImage className="icon" />
+                          <BsImage className='icon' />
                         </Link>
                         <Link to={`/edit/${post._id}`}>
-                          <BsPencil className="icon" />
+                          <BsPencil className='icon' />
                         </Link>
-                        <BsArchive className="icon" />
+                        <BsArchive
+                          onClick={() => deletePost(post._id)}
+                          className='icon'
+                        />
                       </div>
                     </div>
                   );
