@@ -2,4 +2,6 @@ const initialState = {
   loader: false,
   updateErrors: [],
 };
-export const updateName = (state = initialState, action) => {};
+export const updateName = (state = initialState, action) => {
+  return state;
+};
