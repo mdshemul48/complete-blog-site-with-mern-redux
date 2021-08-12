@@ -1,7 +1,17 @@
 import Helmet from "react-helmet";
-import React from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "./sidebar";
+
 const UpdateName = () => {
+  const [userName, setUserName] = useState("");
+  const {
+    user: { name },
+  } = useSelector((state) => state.AuthReducer);
+  useEffect(() => {
+    setUserName(name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <Helmet>
@@ -22,6 +32,8 @@ const UpdateName = () => {
                     type='text'
                     name=''
                     id=''
+                    value={userName}
+                    onChange={(event) => setUserName(event.target.value)}
                     className='group__control'
                     placeholder='Name...'
                   />
