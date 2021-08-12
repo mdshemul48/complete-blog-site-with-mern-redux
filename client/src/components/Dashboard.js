@@ -50,7 +50,9 @@ const Dashboard = () => {
         },
       };
       try {
-        const response = await axios.delete(`/delete/${id}`, config);
+        const {
+          data: { msg },
+        } = await axios.delete(`/delete/${id}`, config);
       } catch (error) {
         dispatch({ type: SET_LOADER });
         console.log(error.response);
