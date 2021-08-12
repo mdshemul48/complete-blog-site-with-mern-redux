@@ -14,19 +14,21 @@ import NotFound from "./components/auth/NotFound";
 import Create from "./components/Create";
 import Edit from "./components/Edit";
 import EditImage from "./components/EditImage";
+import UpdateName from "./components/UpdateName";
 function App() {
   return (
     <Provider store={Store}>
       <Router>
         <NavBar />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <RouteLinks path="/register" exact component={Register} />
-          <RouteLinks path="/login" exact component={Login} />
-          <PrivateRoute path="/dashboard/:page?" exact component={Dashboard} />
-          <PrivateRoute path="/create" exact component={Create} />
-          <PrivateRoute path="/edit/:id" exact component={Edit} />
-          <PrivateRoute path="/UpdateImage/:id" exact component={EditImage} />
+          <Route path='/' exact component={Home} />
+          <RouteLinks path='/register' exact component={Register} />
+          <RouteLinks path='/login' exact component={Login} />
+          <PrivateRoute path='/dashboard/:page?' exact component={Dashboard} />
+          <PrivateRoute path='/create' exact component={Create} />
+          <PrivateRoute path='/edit/:id' exact component={Edit} />
+          <PrivateRoute path='/updateImage/:id' exact component={EditImage} />
+          <PrivateRoute path='/updateName' component={UpdateName} />
           <Route component={NotFound} />
         </Switch>
       </Router>

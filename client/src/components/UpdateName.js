@@ -1,35 +1,44 @@
+import Helmet from "react-helmet";
 import React from "react";
 import Sidebar from "./sidebar";
 const UpdateName = () => {
   return (
-    <div className='container'>
-      <div className='row'>
-        <div className='col-3'>
-          <Sidebar />
-        </div>
-        <div className='col-9'>
-          <h3 className='card__h3'>Update Name</h3>
-          <form>
-            <div className='group'>
-              <input
-                type='text'
-                name=''
-                id=''
-                className='group__control'
-                placeholder='Name...'
-              />
+    <>
+      <Helmet>
+        <title>Update Name</title>
+        <meta name='description' content='update the username' />
+      </Helmet>
+      <div className='container mt-100'>
+        <div className='row  ml-minus-15 mr-minus-15'>
+          <div className='col-3 p-15'>
+            <Sidebar />
+          </div>
+          <div className='col-9 p-15'>
+            <div className='card'>
+              <h3 className='card__h3'>Update Name</h3>
+              <form>
+                <div className='group'>
+                  <input
+                    type='text'
+                    name=''
+                    id=''
+                    className='group__control'
+                    placeholder='Name...'
+                  />
+                </div>
+                <div className='group'>
+                  <input
+                    type='submit'
+                    value='Create post'
+                    className='btn btn-default btn-block'
+                  />
+                </div>
+              </form>
             </div>
-            <div className='group'>
-              <input
-                type='submit'
-                value='Create post'
-                className='btn btn-default btn-block'
-              />
-            </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
