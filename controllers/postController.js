@@ -198,7 +198,10 @@ export const updateImage = (req, res) => {
   });
 };
 
-export const deletePost = (req, res) => {
+export const deletePost = async (req, res) => {
   const id = req.params.id;
-  return res.send("gg");
+  try {
+    const response = await PostModel.findByIdAndDelete(id);
+    return res.status(200).json({ msg: "your post has been deleted." });
+  } catch (error) {}
 };

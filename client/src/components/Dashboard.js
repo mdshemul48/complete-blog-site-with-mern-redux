@@ -5,6 +5,7 @@ import {
   REDIRECT_FALSE,
   REMOVE_MESSAGE,
   SET_LOADER,
+  SET_MESSAGE,
 } from "../store/types/PostTypes";
 import { Toaster, toast } from "react-hot-toast";
 import { fetchPosts } from "../store/asyncMethods/PostMethods";
@@ -39,7 +40,16 @@ const Dashboard = () => {
       dispatch({ type: REMOVE_MESSAGE });
     }
   }, [dispatch, redirect, message, id, page]);
-
+  useEffect(() => {
+    dispatch(fetchPosts(id, page));
+    if (redirect) {
+      dispatch({ type: REDIRECT_FALSE });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: REMOVE_MESSAGE });
+    }
+  }, [page, dispatch, id, message, redirect]);
   const deletePost = async (id) => {
     const confirm = window.confirm("Are you really want to delete this post?");
     if (confirm) {
@@ -50,7 +60,11 @@ const Dashboard = () => {
         },
       };
       try {
-        const response = await axios.delete(`/delete/${id}`, config);
+        const {
+          data: { msg },
+        } = await axios.delete(`/delete/${id}`, config);
+        dispatch(fetchPosts(id, page));
+        dispatch({ type: SET_MESSAGE, payload: msg });
       } catch (error) {
         dispatch({ type: SET_LOADER });
         console.log(error.response);

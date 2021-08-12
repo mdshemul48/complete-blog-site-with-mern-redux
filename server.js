@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 // all the routers
 import userRouter from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 
 // castom module and config
 import connectDB from "./config/database.js";
@@ -21,6 +22,7 @@ connectDB();
 
 app.use("/", userRouter);
 app.use("/", postRoutes);
+app.use("/", profileRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
