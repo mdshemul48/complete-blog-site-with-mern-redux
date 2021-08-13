@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateNameAction } from "../store/asyncMethods/profileMethods";
 import { Toaster, toast } from "react-hot-toast";
+
+import { RESET_PROFILE_ERRORS } from "../store/types/ProfileType";
 import Sidebar from "./sidebar";
 
 const UpdateName = () => {

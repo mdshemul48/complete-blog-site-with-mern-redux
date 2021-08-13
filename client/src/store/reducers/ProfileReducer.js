@@ -5,7 +5,7 @@ const initialState = {
 };
 export const updateName = (state = initialState, action) => {
   const { type, payload } = action;
-  if (type) {
+  if (type === SET_PROFILE_ERRORS) {
     return {
       ...state,
       updateErrors: payload,
