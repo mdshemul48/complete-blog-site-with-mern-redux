@@ -69,7 +69,7 @@ const UpdateName = () => {
                 <div className='group'>
                   <input
                     type='submit'
-                    value='Create post'
+                    value='Update Name'
                     className='btn btn-default btn-block'
                   />
                 </div>
