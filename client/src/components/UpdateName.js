@@ -1,23 +1,57 @@
 import Helmet from "react-helmet";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { updateNameAction } from "../store/asyncMethods/profileMethods";
+import { Toaster, toast } from "react-hot-toast";
+import { useHistory } from "react-router-dom";
+
+import { RESET_PROFILE_ERRORS } from "../store/types/ProfileType";
 import Sidebar from "./sidebar";
 
 const UpdateName = () => {
+  const { push } = useHistory();
   const [userName, setUserName] = useState("");
   const {
-    user: { name },
+    user: { name, _id },
   } = useSelector((state) => state.AuthReducer);
+  const dispatch = useDispatch();
+  const { loading, redirect } = useSelector((state) => state.PostReducer);
+  const { updateErrors } = useSelector((state) => state.updateName);
+  const updateNameHandler = (event) => {
+    event.preventDefault();
+    dispatch(updateNameAction({ name: userName, id: _id }));
+  };
   useEffect(() => {
     setUserName(name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (updateErrors.length !== 0) {
+      updateErrors.forEach((error) => toast.error(error.msg));
+    }
+  }, [updateErrors]);
+  useEffect(() => {
+    if (redirect) {
+      push("/dashboard");
+    }
+  }, [redirect, push]);
   return (
     <>
       <Helmet>
         <title>Update Name</title>
         <meta name='description' content='update the username' />
       </Helmet>
+      <Toaster
+        position='top-right'
+        reverseOrder={false}
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <div className='container mt-100'>
         <div className='row  ml-minus-15 mr-minus-15'>
           <div className='col-3 p-15'>
@@ -26,7 +60,7 @@ const UpdateName = () => {
           <div className='col-9 p-15'>
             <div className='card'>
               <h3 className='card__h3'>Update Name</h3>
-              <form>
+              <form onSubmit={updateNameHandler}>
                 <div className='group'>
                   <input
                     type='text'
@@ -41,7 +75,7 @@ const UpdateName = () => {
                 <div className='group'>
                   <input
                     type='submit'
-                    value='Create post'
+                    value='Update Name'
                     className='btn btn-default btn-block'
                   />
                 </div>
