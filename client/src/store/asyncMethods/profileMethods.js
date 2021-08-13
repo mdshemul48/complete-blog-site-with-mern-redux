@@ -1,7 +1,8 @@
 import axios from "axios";
+import { CLOSE_LOADER, REDIRECT_TRUE } from "../types/PostTypes";
 
-export const updateNameAction = (req, res) => {
-  return (dispatch, getState) => {
+export const updateNameAction = (user) => {
+  return async (dispatch, getState) => {
     const {
       AuthReducer: { token },
     } = getState();
@@ -11,6 +12,13 @@ export const updateNameAction = (req, res) => {
       },
     };
     try {
-    } catch (error) {}
+      const { data } = await axios.post("/updateName", user, config);
+      dispatch({ type: CLOSE_LOADER });
+      dispatch({ type: REDIRECT_TRUE });
+      console.log(data);
+    } catch (error) {
+      dispatch({ type: CLOSE_LOADER });
+      console.log(error.response.data);
+    }
   };
 };
