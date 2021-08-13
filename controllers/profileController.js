@@ -12,6 +12,7 @@ export const updateName = async (req, res) => {
         { new: true }
       );
       const token = createToken(user);
+      return res.status(200).json({ token, msg: "Your name has been updated" });
     } catch (error) {
       return res.status(500).json({ errors });
     }
