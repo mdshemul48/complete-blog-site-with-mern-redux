@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateNameAction } from "../store/asyncMethods/profileMethods";
 import { Toaster, toast } from "react-hot-toast";
+import { useHistory } from "react-router-dom";
 
 import { RESET_PROFILE_ERRORS } from "../store/types/ProfileType";
 import Sidebar from "./sidebar";
 
 const UpdateName = () => {
+  const { push } = useHistory();
   const [userName, setUserName] = useState("");
   const {
     user: { name, _id },
@@ -29,7 +31,11 @@ const UpdateName = () => {
       updateErrors.forEach((error) => toast.error(error.msg));
     }
   }, [updateErrors]);
-
+  useEffect(() => {
+    if (redirect) {
+      push("/dashboard");
+    }
+  }, [redirect, push]);
   return (
     <>
       <Helmet>
