@@ -10,6 +10,11 @@ export const updateName = (state = initialState, action) => {
       ...state,
       updateErrors: payload,
     };
+  } else if (type === RESET_PROFILE_ERRORS) {
+    return {
+      ...state,
+      updateErrors: [],
+    };
   } else {
     return state;
   }
