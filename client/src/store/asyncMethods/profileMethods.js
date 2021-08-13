@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CLOSE_LOADER, REDIRECT_TRUE } from "../types/PostTypes";
+import { SET_PROFILE_ERRORS, RESET_PROFILE_ERRORS } from "../types/profileType";
 
 export const updateNameAction = (user) => {
   return async (dispatch, getState) => {
@@ -18,7 +19,10 @@ export const updateNameAction = (user) => {
       console.log(data);
     } catch (error) {
       dispatch({ type: CLOSE_LOADER });
-      console.log(error.response.data);
+      dispatch({
+        type: SET_PROFILE_ERRORS,
+        payload: error.response.data.errors,
+      });
     }
   };
 };
