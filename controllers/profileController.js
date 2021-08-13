@@ -1,5 +1,4 @@
 import userModel from "../models/UserModel.js";
-import jwt from "jsonwebtoken";
 import createToken from "../util/token.js";
 export const updateName = async (req, res) => {
   const { name, id } = req.body;
