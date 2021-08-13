@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CLOSE_LOADER, REDIRECT_TRUE } from "../types/PostTypes";
-import { SET_PROFILE_ERRORS, RESET_PROFILE_ERRORS } from "../types/profileType";
+import { SET_PROFILE_ERRORS, RESET_PROFILE_ERRORS } from "../types/ProfileType";
 
 export const updateNameAction = (user) => {
   return async (dispatch, getState) => {
