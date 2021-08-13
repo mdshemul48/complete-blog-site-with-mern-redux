@@ -1,13 +1,20 @@
 import Helmet from "react-helmet";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { updateNameAction } from "../store/asyncMethods/profileMethods";
+
 import Sidebar from "./sidebar";
 
 const UpdateName = () => {
   const [userName, setUserName] = useState("");
   const {
-    user: { name },
+    user: { name, _id },
   } = useSelector((state) => state.AuthReducer);
+  const dispatch = useDispatch();
+  const updateNameHandler = (event) => {
+    event.preventDefault();
+    dispatch(updateNameAction({ name: userName, id: _id }));
+  };
   useEffect(() => {
     setUserName(name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,7 +33,7 @@ const UpdateName = () => {
           <div className='col-9 p-15'>
             <div className='card'>
               <h3 className='card__h3'>Update Name</h3>
-              <form>
+              <form onSubmit={updateNameHandler}>
                 <div className='group'>
                   <input
                     type='text'
