@@ -34,4 +34,9 @@ export const updatePasswordValidation = [
 
 export const updatePassword = async (req, res) => {
   const { current, newPassword } = req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 };
