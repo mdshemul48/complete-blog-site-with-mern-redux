@@ -49,8 +49,12 @@ export const updatePasswordMethods = (userData) => {
 
     dispatch({ type: SET_LOADER });
     try {
-      // const {data} = await axios.post
+      const { data } = await axios.post("/updatePassword", userData, config);
     } catch (error) {
+      dispatch({
+        type: SET_PROFILE_ERRORS,
+        payload: error.response.data.errors,
+      });
       dispatch({ type: CLOSE_LOADER });
     }
   };

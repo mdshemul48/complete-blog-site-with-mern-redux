@@ -4,8 +4,10 @@ import Sidebar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePasswordMethods } from "../store/asyncMethods/profileMethods";
 
+import Loader from "./Loader";
 const ChangePassword = () => {
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.PostReducer);
   const [passwordState, setPasswordState] = useState({
     currentPassword: "",
     newPassword: "",
@@ -14,7 +16,7 @@ const ChangePassword = () => {
     event.preventDefault();
     dispatch(updatePasswordMethods(passwordState));
   };
-  return (
+  return !loading ? (
     <>
       <Helmet>
         <title>Update Password</title>
@@ -60,6 +62,8 @@ const ChangePassword = () => {
         </div>
       </div>
     </>
+  ) : (
+    <Loader />
   );
 };
 
