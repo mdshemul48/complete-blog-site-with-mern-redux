@@ -1,6 +1,7 @@
 import userModel from "../models/UserModel.js";
 import createToken from "../util/token.js";
 import { body, validationResult } from "express-validator";
+import UserModel from "../models/UserModel.js";
 
 export const updateName = async (req, res) => {
   const { name, id } = req.body;
@@ -38,5 +39,7 @@ export const updatePassword = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
+  } else {
+    const user = await UserModel.findOne();
   }
 };

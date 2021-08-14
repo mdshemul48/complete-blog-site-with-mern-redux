@@ -39,14 +39,17 @@ export const updateNameAction = (user) => {
 export const updatePasswordMethods = (userData) => {
   return async (dispatch, getState) => {
     const {
-      AuthReducer: { token },
+      AuthReducer: {
+        token,
+        user: { _id },
+      },
     } = getState();
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-
+    userData.userId = _id;
     dispatch({ type: SET_LOADER });
     try {
       const { data } = await axios.post("/updatePassword", userData, config);
