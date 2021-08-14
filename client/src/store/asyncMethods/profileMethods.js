@@ -1,5 +1,10 @@
 import axios from "axios";
-import { CLOSE_LOADER, REDIRECT_TRUE, SET_MESSAGE } from "../types/PostTypes";
+import {
+  CLOSE_LOADER,
+  REDIRECT_TRUE,
+  SET_LOADER,
+  SET_MESSAGE,
+} from "../types/PostTypes";
 import { SET_TOKEN } from "../types/UserTypes";
 import { SET_PROFILE_ERRORS, RESET_PROFILE_ERRORS } from "../types/ProfileType";
 
@@ -27,6 +32,35 @@ export const updateNameAction = (user) => {
         type: SET_PROFILE_ERRORS,
         payload: error.response.data.errors,
       });
+    }
+  };
+};
+
+export const updatePasswordMethods = (userData) => {
+  return async (dispatch, getState) => {
+    const {
+      AuthReducer: {
+        token,
+        user: { _id },
+      },
+    } = getState();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    userData.userId = _id;
+    dispatch({ type: SET_LOADER });
+    try {
+      const { data } = await axios.post("/updatePassword", userData, config);
+      dispatch({ type: SET_MESSAGE, payload: data.msg });
+      dispatch({ type: REDIRECT_TRUE });
+    } catch (error) {
+      dispatch({
+        type: SET_PROFILE_ERRORS,
+        payload: error.response.data.errors,
+      });
+      dispatch({ type: CLOSE_LOADER });
     }
   };
 };

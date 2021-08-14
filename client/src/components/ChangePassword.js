@@ -1,18 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Helmet from "react-helmet";
+import { useHistory } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 import Sidebar from "./sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePasswordMethods } from "../store/asyncMethods/profileMethods";
+import { RESET_PROFILE_ERRORS } from "../store/types/ProfileType";
 
+import Loader from "./Loader";
 const ChangePassword = () => {
+  const { push } = useHistory();
+  const dispatch = useDispatch();
+  const { loading, redirect } = useSelector((state) => state.PostReducer);
+  const { updateErrors } = useSelector((state) => state.updateName);
   const [passwordState, setPasswordState] = useState({
     currentPassword: "",
     newPassword: "",
   });
-  return (
+  const updatePasswordHandler = (event) => {
+    event.preventDefault();
+    console.log(passwordState);
+    dispatch(updatePasswordMethods(passwordState));
+  };
+
+  const passwordChangeHandler = (event) => {
+    setPasswordState((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  useEffect(() => {
+    if (updateErrors.length !== 0) {
+      updateErrors.forEach((error) => toast.error(error.msg));
+      dispatch({ type: RESET_PROFILE_ERRORS });
+    }
+  }, [updateErrors, dispatch]);
+
+  useEffect(() => {
+    if (redirect) {
+      push("/dashboard");
+    }
+  }, [redirect, push]);
+  return !loading ? (
     <>
       <Helmet>
         <title>Update Password</title>
         <meta name='description' content='update the password' />
       </Helmet>
+      <Toaster
+        position='top-right'
+        reverseOrder={false}
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <div className='container mt-100'>
         <div className='row ml-minus-15 mr-minus-15'>
           <div className='col-3  p-15'>
@@ -21,23 +66,30 @@ const ChangePassword = () => {
           <div className='col-9  p-15'>
             <div className='card'>
               <h3 className='card__h3'>Change Password</h3>
-              <form>
+              <form onSubmit={updatePasswordHandler}>
                 <div className='group'>
                   <input
                     type='password'
-                    name=''
-                    id=''
+                    name='currentPassword'
                     className='group__control'
                     placeholder='Current password'
+                    onChange={passwordChangeHandler}
                   />
                 </div>
                 <div className='group'>
                   <input
                     type='password'
-                    name=''
-                    id=''
+                    name='newPassword'
                     className='group__control'
                     placeholder='New password'
+                    onChange={passwordChangeHandler}
+                  />
+                </div>
+                <div className='group'>
+                  <input
+                    type='submit'
+                    className='btn btn-default btn-block'
+                    value='Update Password'
                   />
                 </div>
               </form>
@@ -46,6 +98,8 @@ const ChangePassword = () => {
         </div>
       </div>
     </>
+  ) : (
+    <Loader />
   );
 };
 
