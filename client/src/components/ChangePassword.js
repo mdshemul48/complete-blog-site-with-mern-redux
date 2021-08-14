@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Helmet from "react-helmet";
+import { useHistory } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import Sidebar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +9,9 @@ import { RESET_PROFILE_ERRORS } from "../store/types/ProfileType";
 
 import Loader from "./Loader";
 const ChangePassword = () => {
+  const { push } = useHistory();
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.PostReducer);
+  const { loading, redirect } = useSelector((state) => state.PostReducer);
   const { updateErrors } = useSelector((state) => state.updateName);
   const [passwordState, setPasswordState] = useState({
     currentPassword: "",
@@ -34,6 +36,12 @@ const ChangePassword = () => {
       dispatch({ type: RESET_PROFILE_ERRORS });
     }
   }, [updateErrors, dispatch]);
+
+  useEffect(() => {
+    if (redirect) {
+      push("/dashboard");
+    }
+  }, [redirect, push]);
   return !loading ? (
     <>
       <Helmet>

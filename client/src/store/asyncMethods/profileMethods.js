@@ -53,6 +53,8 @@ export const updatePasswordMethods = (userData) => {
     dispatch({ type: SET_LOADER });
     try {
       const { data } = await axios.post("/updatePassword", userData, config);
+      dispatch({ type: SET_MESSAGE, payload: data.msg });
+      dispatch({ type: REDIRECT_TRUE });
     } catch (error) {
       dispatch({
         type: SET_PROFILE_ERRORS,

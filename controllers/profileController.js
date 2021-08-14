@@ -48,7 +48,6 @@ export const updatePassword = async (req, res) => {
         return res.status(400).json({ errors: [{ msg: "user not found." }] });
       }
 
-      console.log(currentPassword, user.password);
       const comparedPassword = await bcrypt.compare(
         currentPassword,
         user.password
@@ -60,7 +59,7 @@ export const updatePassword = async (req, res) => {
       }
 
       // hashing the password
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
 
       await userModel.findOneAndUpdate(
         { _id: userId },
@@ -70,7 +69,6 @@ export const updatePassword = async (req, res) => {
 
       return res.status(200).json({ msg: "your user has been updated." });
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ errors: [{ msg: error.message }] });
     }
     // const newpassqwo
