@@ -37,7 +37,7 @@ export const updateNameAction = (user) => {
 };
 
 export const updatePasswordMethods = (userData) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const {
       AuthReducer: { token },
     } = getState();
@@ -47,8 +47,9 @@ export const updatePasswordMethods = (userData) => {
       },
     };
 
+    dispatch({ type: SET_LOADER });
     try {
-      dispatch({ type: SET_LOADER });
+      // const {data} = await axios.post
     } catch (error) {
       dispatch({ type: CLOSE_LOADER });
     }
