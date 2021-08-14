@@ -4,6 +4,7 @@ import { Toaster, toast } from "react-hot-toast";
 import Sidebar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePasswordMethods } from "../store/asyncMethods/profileMethods";
+import { RESET_PROFILE_ERRORS } from "../store/types/ProfileType";
 
 import Loader from "./Loader";
 const ChangePassword = () => {
@@ -30,8 +31,9 @@ const ChangePassword = () => {
   useEffect(() => {
     if (updateErrors.length !== 0) {
       updateErrors.forEach((error) => toast.error(error.msg));
+      dispatch({ type: RESET_PROFILE_ERRORS });
     }
-  }, [updateErrors]);
+  }, [updateErrors, dispatch]);
   return !loading ? (
     <>
       <Helmet>
