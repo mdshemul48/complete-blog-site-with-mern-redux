@@ -1,8 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import Helmet from "react-helmet";
 import Sidebar from "./sidebar";
 
 const ChangePassword = () => {
+  const [passwordState, setPasswordState] = useState({
+    currentPassword: "",
+    newPassword: "",
+  });
   return (
     <>
       <Helmet>
