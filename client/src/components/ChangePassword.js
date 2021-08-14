@@ -6,15 +6,39 @@ const ChangePassword = () => {
   return (
     <>
       <Helmet>
-        <title>Update Name</title>
-        <meta name='description' content='update the username' />
+        <title>Update Password</title>
+        <meta name='description' content='update the password' />
       </Helmet>
       <div className='container mt-100'>
-        <div className='row'>
-          <div className='col-3'>
+        <div className='row ml-minus-15 mr-minus-15'>
+          <div className='col-3  p-15'>
             <Sidebar />
           </div>
-          <div className='col-9'></div>
+          <div className='col-9  p-15'>
+            <div className='card'>
+              <h3 className='card__h3'>Change Password</h3>
+              <form>
+                <div className='group'>
+                  <input
+                    type='password'
+                    name=''
+                    id=''
+                    className='group__control'
+                    placeholder='Current password'
+                  />
+                </div>
+                <div className='group'>
+                  <input
+                    type='password'
+                    name=''
+                    id=''
+                    className='group__control'
+                    placeholder='New password'
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </>
