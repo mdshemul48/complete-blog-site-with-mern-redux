@@ -16,7 +16,15 @@ const ChangePassword = () => {
   });
   const updatePasswordHandler = (event) => {
     event.preventDefault();
+    console.log(passwordState);
     dispatch(updatePasswordMethods(passwordState));
+  };
+
+  const passwordChangeHandler = (event) => {
+    setPasswordState((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   useEffect(() => {
@@ -52,17 +60,19 @@ const ChangePassword = () => {
                 <div className='group'>
                   <input
                     type='password'
-                    name=''
+                    name='currentPassword'
                     className='group__control'
                     placeholder='Current password'
+                    onChange={passwordChangeHandler}
                   />
                 </div>
                 <div className='group'>
                   <input
                     type='password'
-                    name=''
+                    name='newPassword'
                     className='group__control'
                     placeholder='New password'
+                    onChange={passwordChangeHandler}
                   />
                 </div>
                 <div className='group'>
