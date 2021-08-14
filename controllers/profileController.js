@@ -1,5 +1,6 @@
 import userModel from "../models/UserModel.js";
 import createToken from "../util/token.js";
+import { body, validationResult } from "express-validator";
 
 export const updateName = async (req, res) => {
   const { name, id } = req.body;
@@ -20,4 +21,17 @@ export const updateName = async (req, res) => {
   }
 };
 
-export const updatePassword = async (req, res) => {};
+export const updatePasswordValidation = [
+  body("currentPassword")
+    .not()
+    .isEmpty()
+    .trim()
+    .withMessage("Current password is required."),
+  body("newPassword")
+    .isLength({ min: 6 })
+    .withMessage("New password must be 6 characters long."),
+];
+
+export const updatePassword = async (req, res) => {
+  const { current, newPassword } = req.body;
+};
