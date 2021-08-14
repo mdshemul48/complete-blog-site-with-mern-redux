@@ -40,6 +40,13 @@ const ChangePassword = () => {
                     placeholder='New password'
                   />
                 </div>
+                <div className='group'>
+                  <input
+                    type='submit'
+                    className='btn btn-default btn-block'
+                    value='Update Password'
+                  />
+                </div>
               </form>
             </div>
           </div>
