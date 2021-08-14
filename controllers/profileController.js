@@ -62,11 +62,13 @@ export const updatePassword = async (req, res) => {
       // hashing the password
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = await userModel.findOneAndUpdate(
+      await userModel.findOneAndUpdate(
         { _id: userId },
         { password: hashedPassword },
         { new: true }
       );
+
+      return res.status(200).json({ msg: "your user has been updated." });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ errors: [{ msg: error.message }] });
