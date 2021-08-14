@@ -1,5 +1,6 @@
 import userModel from "../models/UserModel.js";
 import createToken from "../util/token.js";
+
 export const updateName = async (req, res) => {
   const { name, id } = req.body;
   if (name === "") {
@@ -18,3 +19,5 @@ export const updateName = async (req, res) => {
     }
   }
 };
+
+export const updatePassword = async (req, res) => {};
