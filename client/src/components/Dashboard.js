@@ -12,7 +12,7 @@ import { fetchPosts } from "../store/asyncMethods/PostMethods";
 import { Link, useParams } from "react-router-dom";
 import { BsPencil, BsArchive, BsImage } from "react-icons/bs";
 import axios from "axios";
-
+import dateFormate from "dateformat";
 import Pagination from "./Pagination";
 import Loader from "./Loader";
 import Sidebar from "./sidebar";
@@ -101,6 +101,7 @@ const Dashboard = () => {
                     <div className='dashboard__posts' key={post._id}>
                       <div className='dashboard__posts__title'>
                         <Link to='/'>{post.title}</Link>
+                        <span>{dateFormate(post.updatedAt)}</span>
                       </div>
                       <div className='dashboard__posts__links'>
                         <Link to={`/updateImage/${post._id}`}>
