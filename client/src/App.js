@@ -18,23 +18,29 @@ import UpdateName from "./components/UpdateName";
 import UpdatePassword from "./components/ChangePassword";
 function App() {
   return (
-    <Provider store={Store}>
-      <Router>
-        <NavBar />
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <RouteLinks path='/register' exact component={Register} />
-          <RouteLinks path='/login' exact component={Login} />
-          <PrivateRoute path='/dashboard/:page?' exact component={Dashboard} />
-          <PrivateRoute path='/create' exact component={Create} />
-          <PrivateRoute path='/edit/:id' exact component={Edit} />
-          <PrivateRoute path='/updateImage/:id' exact component={EditImage} />
-          <PrivateRoute path='/updateName' component={UpdateName} />
-          <PrivateRoute path='/updatePassword' component={UpdatePassword} />
-          <Route component={NotFound} />
-        </Switch>
-      </Router>
-    </Provider>
+    <>
+      <Provider store={Store}>
+        <Router>
+          <NavBar />
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <RouteLinks path='/register' exact component={Register} />
+            <RouteLinks path='/login' exact component={Login} />
+            <PrivateRoute
+              path='/dashboard/:page?'
+              exact
+              component={Dashboard}
+            />
+            <PrivateRoute path='/create' exact component={Create} />
+            <PrivateRoute path='/edit/:id' exact component={Edit} />
+            <PrivateRoute path='/updateImage/:id' exact component={EditImage} />
+            <PrivateRoute path='/updateName' component={UpdateName} />
+            <PrivateRoute path='/updatePassword' component={UpdatePassword} />
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
+      </Provider>
+    </>
   );
 }
 
