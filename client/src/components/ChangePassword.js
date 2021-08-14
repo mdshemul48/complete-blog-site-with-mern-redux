@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Helmet from "react-helmet";
+import { Toaster, toast } from "react-hot-toast";
 import Sidebar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePasswordMethods } from "../store/asyncMethods/profileMethods";
@@ -8,6 +9,7 @@ import Loader from "./Loader";
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.PostReducer);
+  const { updateErrors } = useSelector((state) => state.updateName);
   const [passwordState, setPasswordState] = useState({
     currentPassword: "",
     newPassword: "",
@@ -16,12 +18,28 @@ const ChangePassword = () => {
     event.preventDefault();
     dispatch(updatePasswordMethods(passwordState));
   };
+
+  useEffect(() => {
+    if (updateErrors.length !== 0) {
+      updateErrors.forEach((error) => toast.error(error.msg));
+    }
+  }, [updateErrors]);
   return !loading ? (
     <>
       <Helmet>
         <title>Update Password</title>
         <meta name='description' content='update the password' />
       </Helmet>
+      <Toaster
+        position='top-right'
+        reverseOrder={false}
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <div className='container mt-100'>
         <div className='row ml-minus-15 mr-minus-15'>
           <div className='col-3  p-15'>
@@ -35,7 +53,6 @@ const ChangePassword = () => {
                   <input
                     type='password'
                     name=''
-                    id=''
                     className='group__control'
                     placeholder='Current password'
                   />
@@ -44,7 +61,6 @@ const ChangePassword = () => {
                   <input
                     type='password'
                     name=''
-                    id=''
                     className='group__control'
                     placeholder='New password'
                   />
