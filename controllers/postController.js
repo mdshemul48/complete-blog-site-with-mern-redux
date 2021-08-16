@@ -206,8 +206,20 @@ export const deletePost = async (req, res) => {
   } catch (error) {}
 };
 
-export const home = (req, res) => {
+export const home = async (req, res) => {
   const page = req.params.page;
   const parPage = 6;
   const skip = (page - 1) * parPage;
+  try {
+    const count = await PostModel.find({}).countDocuments();
+
+    const posts = await PostModel.find({})
+      .skip(skip)
+      .limit(parPage)
+      .sort({ updatedAt: -1 });
+
+    return res.status(200).json({ response: posts, count, parPage });
+  } catch (error) {
+    return res.status(500).json({ errors: error, msg: error.message });
+  }
 };
