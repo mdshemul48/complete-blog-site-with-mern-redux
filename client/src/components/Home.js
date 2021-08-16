@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { homePosts } from "../store/asyncMethods/PostMethods";
-import { Loader } from "./Loader";
+import Loader from "./Loader";
 const Home = () => {
   let { page } = useParams();
 
