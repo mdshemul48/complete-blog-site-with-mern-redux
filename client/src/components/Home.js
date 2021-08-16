@@ -30,7 +30,19 @@ const Home = () => {
               posts.map((post) => {
                 return (
                   <div className='row'>
-                    <div className='col-8'></div>
+                    <div className='col-8'>
+                      <div className='post'>
+                        <div className='post__header'>
+                          <div className='post__header__avatar'>
+                            {post.userName[0]}
+                          </div>
+                          <div className='post__header__user'>
+                            <span>{post.userName}</span>
+                            <span>post time</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div className='col-4'>image section</div>
                   </div>
                 );
