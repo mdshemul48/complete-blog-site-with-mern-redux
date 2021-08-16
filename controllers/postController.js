@@ -205,3 +205,9 @@ export const deletePost = async (req, res) => {
     return res.status(200).json({ msg: "your post has been deleted." });
   } catch (error) {}
 };
+
+export const home = (req, res) => {
+  const page = req.params.page;
+  const parPage = 6;
+  const skip = (page - 1) * parPage;
+};
