@@ -6,7 +6,12 @@
 
 .post-style {
   border-bottom: 1px solid #e5e7eb;
+  margin: 20px;
   &:last-child {
     border-bottom: none;
   }
+}
+
+.post {
+  padding: 2rem;
 }
