@@ -23,13 +23,13 @@ const Home = () => {
         <title>Web articles</title>
         <meta name='description' content='Learn html, css, and javascript' />
       </Helmet>
-      <div className='container'>
-        <div className='col-8'>
+      <div className='container mt-100'>
+        <div className='col-8 home'>
           {!loading ? (
             posts.length > 0 ? (
               posts.map((post) => {
                 return (
-                  <div className='row'>
+                  <div className='row post-style'>
                     <div className='col-8'>
                       <div className='post'>
                         <div className='post__header'>

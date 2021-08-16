@@ -1,0 +1,12 @@
+.home {
+  background-color: $white;
+  border-radius: 5px;
+  border: 1px solid #e5e7eb;
+}
+
+.post-style {
+  border-bottom: 1px solid #e5e7eb;
+  &:last-child {
+    border-bottom: none;
+  }
+}
