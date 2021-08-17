@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import dateformat from "dateformat";
+import htmlToText from "html2plaintext";
 import { homePosts } from "../store/asyncMethods/PostMethods";
 
 import Loader from "./Loader";
@@ -41,6 +42,14 @@ const Home = () => {
                           <div className='post__header__user'>
                             <span>{post.userName}</span>
                             <span>{dateformat(post.updatedAt)}</span>
+                          </div>
+                        </div>
+                        <div className='post__body'>
+                          <h1 className='post__body__title'>
+                            <Link>{post.title}</Link>
+                          </h1>
+                          <div className='post__body__details'>
+                            {htmlToText(post.body.slice(0, 300))}
                           </div>
                         </div>
                       </div>
