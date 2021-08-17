@@ -151,3 +151,18 @@ export const updateImageAction = (updateData) => {
     }
   };
 };
+
+export const homePosts = (page) => {
+  return async (dispatch) => {
+    dispatch({ type: SET_LOADER });
+    try {
+      const {
+        data: { response, count, parPage },
+      } = await axios.get(`/home/${page}`);
+      dispatch({ type: CLOSE_LOADER });
+      dispatch({ type: SET_POSTS, payload: { response, count, parPage } });
+    } catch (error) {
+      dispatch({ type: CLOSE_LOADER });
+    }
+  };
+};
