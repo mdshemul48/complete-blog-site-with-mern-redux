@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import dateformat from "dateformat";
 import { homePosts } from "../store/asyncMethods/PostMethods";
+
 import Loader from "./Loader";
 const Home = () => {
   let { page } = useParams();
@@ -33,12 +35,12 @@ const Home = () => {
                     <div className='col-8'>
                       <div className='post'>
                         <div className='post__header'>
-                          <div className='post__header__avatar'>
+                          <div className='post__header__avator'>
                             {post.userName[0]}
                           </div>
                           <div className='post__header__user'>
                             <span>{post.userName}</span>
-                            <span>post time</span>
+                            <span>{dateformat(post.updatedAt)}</span>
                           </div>
                         </div>
                       </div>

@@ -15,7 +15,7 @@
 .post {
   &__header {
     display: flex;
-    &__avatar {
+    &__avator {
       width: 4rem;
       height: 4rem;
       background-color: $green;
@@ -33,8 +33,12 @@
       display: flex;
       flex-direction: column;
       span:nth-child(1) {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         text-transform: capitalize;
+        font-weight: 400;
+      }
+      span:nth-child(2) {
+        font-size: 1.3rem;
         font-weight: 400;
       }
     }
