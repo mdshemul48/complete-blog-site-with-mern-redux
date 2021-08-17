@@ -28,5 +28,15 @@
       font-weight: 500;
       text-transform: uppercase;
     }
+    &__user {
+      margin-left: 1rem;
+      display: flex;
+      flex-direction: column;
+      span:nth-child(1) {
+        font-size: 1.4rem;
+        text-transform: capitalize;
+        font-weight: 400;
+      }
+    }
   }
 }
