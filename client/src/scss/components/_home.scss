@@ -6,12 +6,27 @@
 
 .post-style {
   border-bottom: 1px solid #e5e7eb;
-  margin: 20px;
+  padding: 2rem;
   &:last-child {
     border-bottom: none;
   }
 }
 
 .post {
-  padding: 2rem;
+  &__header {
+    display: flex;
+    &__avatar {
+      width: 4rem;
+      height: 4rem;
+      background-color: $green;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: $white;
+      font-size: 18px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+  }
 }

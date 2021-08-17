@@ -24,7 +24,7 @@ const Home = () => {
         <meta name='description' content='Learn html, css, and javascript' />
       </Helmet>
       <div className='container mt-100'>
-        <div className='col-8 home'>
+        <div className='col-9 home'>
           {!loading ? (
             posts.length > 0 ? (
               posts.map((post) => {
