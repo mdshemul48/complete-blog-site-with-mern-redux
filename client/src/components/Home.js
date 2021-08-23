@@ -54,7 +54,9 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className='col-4'>image section</div>
+                    <div className='col-4'>
+                      <img src={`/images/poster/${post.image}`} alt='post' />
+                    </div>
                   </div>
                 );
               })
