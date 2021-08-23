@@ -124,7 +124,12 @@ const Dashboard = () => {
             ) : (
               <Loader />
             )}
-            <Pagination count={count} parPage={parPage} page={page} />
+            <Pagination
+              path='dashboard'
+              count={count}
+              parPage={parPage}
+              page={page}
+            />
           </div>
         </div>
       </div>

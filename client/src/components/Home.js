@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import dateformat from "dateformat";
 import htmlToText from "html2plaintext";
 import { homePosts } from "../store/asyncMethods/PostMethods";
+import Pagination from "./Pagination";
 
 import Loader from "./Loader";
 const Home = () => {
@@ -26,7 +27,7 @@ const Home = () => {
         <title>Web articles</title>
         <meta name='description' content='Learn html, css, and javascript' />
       </Helmet>
-      <div className='container mt-100'>
+      <div className='container mt-100' style={{ marginBottom: "100px" }}>
         <div className='col-9 home'>
           {!loading ? (
             posts.length > 0 ? (
@@ -55,7 +56,9 @@ const Home = () => {
                       </div>
                     </div>
                     <div className='col-4'>
-                      <img src={`/images/poster/${post.image}`} alt='post' />
+                      <div className='post__image'>
+                        <img src={`/images/poster/${post.image}`} alt='post' />
+                      </div>
                     </div>
                   </div>
                 );
@@ -66,6 +69,16 @@ const Home = () => {
           ) : (
             <Loader />
           )}
+        </div>
+        <div className='row'>
+          <div className='col-9'>
+            <Pagination
+              path='home'
+              page={page}
+              parPage={parPage}
+              count={count}
+            />
+          </div>
         </div>
       </div>
     </>
