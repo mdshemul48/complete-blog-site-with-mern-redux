@@ -33,7 +33,7 @@ const Home = () => {
             posts.length > 0 ? (
               posts.map((post) => {
                 return (
-                  <div className='row post-style'>
+                  <div className='row post-style' key={post._id}>
                     <div className='col-8'>
                       <div className='post'>
                         <div className='post__header'>
@@ -47,7 +47,9 @@ const Home = () => {
                         </div>
                         <div className='post__body'>
                           <h1 className='post__body__title'>
-                            <Link>{post.title}</Link>
+                            <Link to={`/details/${post._id}`}>
+                              {post.title}
+                            </Link>
                           </h1>
                           <div className='post__body__details'>
                             {htmlToText(post.body.slice(0, 300))}
