@@ -18,7 +18,7 @@ const Details = () => {
     <div className='container'>
       <div className='row mt-100'>
         <div className='col-8'>
-          {!loading ? (
+          {!loading && details?._id ? (
             <div className='post_details'>
               <div className='post__header'>
                 <div className='post__header__avator'>
