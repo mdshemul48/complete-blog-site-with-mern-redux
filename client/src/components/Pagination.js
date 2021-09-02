@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
-const Pagination = ({ count, page, parPage }) => {
+const Pagination = ({ path, count, page, parPage }) => {
   // counting post and deciding total page required
   let totalPages = Math.ceil(count / parPage);
   // this will start the loop counter from the current page
@@ -24,7 +24,7 @@ const Pagination = ({ count, page, parPage }) => {
     for (let i = startLoop; i <= endLoop; i++) {
       store.push(
         <li key={i} className={i === +page ? "active" : ""}>
-          <Link to={`/dashboard/${i}`}>{i}</Link>
+          <Link to={`/${path}/${i}`}>{i}</Link>
         </li>
       );
     }
@@ -35,7 +35,7 @@ const Pagination = ({ count, page, parPage }) => {
     if (page < totalPages) {
       return (
         <li>
-          <Link to={`/dashboard/${+page + 1}`}>
+          <Link to={`/${path}/${+page + 1}`}>
             <BsChevronDoubleRight />
           </Link>
         </li>
@@ -47,7 +47,7 @@ const Pagination = ({ count, page, parPage }) => {
     if (page > 1) {
       return (
         <li>
-          <Link to={`/dashboard/${+page - 1}`}>
+          <Link to={`/${path}/${+page - 1}`}>
             <BsChevronDoubleLeft />
           </Link>
         </li>
@@ -55,7 +55,7 @@ const Pagination = ({ count, page, parPage }) => {
     }
   };
   return totalPages ? (
-    <div className="pagination">
+    <div className='pagination'>
       {prev()}
       {links()}
       {next()}

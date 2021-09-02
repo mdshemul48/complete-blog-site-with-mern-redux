@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import dateformat from "dateformat";
 import htmlToText from "html2plaintext";
 import { homePosts } from "../store/asyncMethods/PostMethods";
+import Pagination from "./Pagination";
 
 import Loader from "./Loader";
 const Home = () => {
@@ -26,13 +27,13 @@ const Home = () => {
         <title>Web articles</title>
         <meta name='description' content='Learn html, css, and javascript' />
       </Helmet>
-      <div className='container mt-100'>
+      <div className='container mt-100' style={{ marginBottom: "100px" }}>
         <div className='col-9 home'>
           {!loading ? (
             posts.length > 0 ? (
               posts.map((post) => {
                 return (
-                  <div className='row post-style'>
+                  <div className='row post-style' key={post._id}>
                     <div className='col-8'>
                       <div className='post'>
                         <div className='post__header'>
@@ -46,7 +47,9 @@ const Home = () => {
                         </div>
                         <div className='post__body'>
                           <h1 className='post__body__title'>
-                            <Link>{post.title}</Link>
+                            <Link to={`/details/${post._id}`}>
+                              {post.title}
+                            </Link>
                           </h1>
                           <div className='post__body__details'>
                             {htmlToText(post.body.slice(0, 300))}
@@ -54,7 +57,11 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className='col-4'>image section</div>
+                    <div className='col-4'>
+                      <div className='post__image'>
+                        <img src={`/images/poster/${post.image}`} alt='post' />
+                      </div>
+                    </div>
                   </div>
                 );
               })
@@ -64,6 +71,16 @@ const Home = () => {
           ) : (
             <Loader />
           )}
+        </div>
+        <div className='row'>
+          <div className='col-9'>
+            <Pagination
+              path='home'
+              page={page}
+              parPage={parPage}
+              count={count}
+            />
+          </div>
         </div>
       </div>
     </>

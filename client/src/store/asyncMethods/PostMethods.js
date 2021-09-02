@@ -11,6 +11,7 @@ import {
   POST_REQUEST,
   SET_UPDATE_ERRORS,
   UPDATE_IMAGE_ERROR,
+  SET_DETAILS,
 } from "../types/PostTypes";
 
 export const createAction = (postData) => {
@@ -163,6 +164,22 @@ export const homePosts = (page) => {
       dispatch({ type: SET_POSTS, payload: { response, count, parPage } });
     } catch (error) {
       dispatch({ type: CLOSE_LOADER });
+    }
+  };
+};
+
+export const postDetails = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: SET_LOADER });
+    try {
+      const {
+        data: { post },
+      } = await axios.get(`/details/${id}`);
+      dispatch({ type: CLOSE_LOADER });
+      dispatch({ type: SET_DETAILS, payload: post });
+    } catch (error) {
+      dispatch({ type: CLOSE_LOADER });
+      console.log(error);
     }
   };
 };
