@@ -166,3 +166,17 @@ export const homePosts = (page) => {
     }
   };
 };
+
+export const postDetails = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: SET_LOADER });
+    try {
+      const {
+        data: { post },
+      } = await axios.get(`/details/${id}`);
+    } catch (error) {
+      dispatch({ type: CLOSE_LOADER });
+      console.log(error);
+    }
+  };
+};
