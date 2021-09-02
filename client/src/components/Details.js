@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import dateformat from "dateformat";
 import { postDetails } from "../store/asyncMethods/PostMethods";
 
 import Loader from "./Loader";
@@ -17,7 +18,21 @@ const Details = () => {
     <div className='container'>
       <div className='row mt-100'>
         <div className='col-8'>
-          {!loading ? <div className='post_details'>Hello</div> : <Loader />}
+          {!loading ? (
+            <div className='post_details'>
+              <div className='post__header'>
+                <div className='post__header__avator'>
+                  {details.userName[0]}
+                </div>
+                <div className='post__header__user'>
+                  <span>{details.userName}</span>
+                  <span>{dateformat(details.updatedAt)}</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </div>
