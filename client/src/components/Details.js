@@ -20,16 +20,14 @@ const Details = () => {
       <div className='row mt-100'>
         <div className='col-8'>
           {!loading && details?._id ? (
-            <>
-              <div className='post_details'>
-                <div className='post__header'>
-                  <div className='post__header__avator'>
-                    {details.userName[0]}
-                  </div>
-                  <div className='post__header__user'>
-                    <span>{details.userName}</span>
-                    <span>{dateformat(details.updatedAt)}</span>
-                  </div>
+            <div className='post__details'>
+              <div className='post__header'>
+                <div className='post__header__avator'>
+                  {details.userName[0]}
+                </div>
+                <div className='post__header__user'>
+                  <span>{details.userName}</span>
+                  <span>{dateformat(details.updatedAt)}</span>
                 </div>
               </div>
               <div className='post__body'>
@@ -38,7 +36,7 @@ const Details = () => {
                   {htmlToText(details.body)}
                 </div>
               </div>
-            </>
+            </div>
           ) : (
             <Loader />
           )}
