@@ -35,6 +35,9 @@ const Details = () => {
                 <div className='post__body__details'>
                   {htmlToText(details.body)}
                 </div>
+                <div className='post__body__image'>
+                  <img src={`/images/poster/${details.image}`} alt='' />
+                </div>
               </div>
             </div>
           ) : (
