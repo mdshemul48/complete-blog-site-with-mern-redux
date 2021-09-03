@@ -7,13 +7,13 @@ import { postDetails } from "../store/asyncMethods/PostMethods";
 
 import Loader from "./Loader";
 const Details = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const { loading, details } = useSelector((state) => state.PostReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postDetails(id));
-  }, [dispatch, id]);
+    dispatch(postDetails(slug));
+  }, [dispatch, slug]);
 
   return (
     <div className='container'>
@@ -34,6 +34,9 @@ const Details = () => {
                 <h1 className='post__body__title'>{details.title}</h1>
                 <div className='post__body__details'>
                   {htmlToText(details.body)}
+                </div>
+                <div className='post__body__image'>
+                  <img src={`/images/poster/${details.image}`} alt='' />
                 </div>
               </div>
             </div>

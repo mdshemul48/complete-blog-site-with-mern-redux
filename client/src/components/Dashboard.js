@@ -100,7 +100,7 @@ const Dashboard = () => {
                   return (
                     <div className='dashboard__posts' key={post._id}>
                       <div className='dashboard__posts__title'>
-                        <Link to='/'>{post.title}</Link>
+                        <Link to={`details/${post.slug}`}>{post.title}</Link>
                         <span>Published {dateFormate(post.updatedAt)}</span>
                       </div>
                       <div className='dashboard__posts__links'>

@@ -225,9 +225,9 @@ export const home = async (req, res) => {
 };
 
 export const details = async (req, res) => {
-  const { id } = req.params;
+  const { slug } = req.params;
   try {
-    const post = await PostModel.findOne({ _id: id });
+    const post = await PostModel.findOne({ slug: slug });
     return res.status(200).json({ post });
   } catch (error) {
     return res.status(500).json({ errors: error, msg: error.message });

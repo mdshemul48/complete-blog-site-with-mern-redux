@@ -168,13 +168,13 @@ export const homePosts = (page) => {
   };
 };
 
-export const postDetails = (id) => {
+export const postDetails = (slug) => {
   return async (dispatch) => {
     dispatch({ type: SET_LOADER });
     try {
       const {
         data: { post },
-      } = await axios.get(`/details/${id}`);
+      } = await axios.get(`/details/${slug}`);
       dispatch({ type: CLOSE_LOADER });
       dispatch({ type: SET_DETAILS, payload: post });
     } catch (error) {
